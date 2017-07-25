@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace SnipsSolution
 {
@@ -57,20 +58,39 @@ namespace SnipsSolution
             }
             return result;
         }
-
-        public static void TowerOfHanoi(int countOfDisks, int fromPole, int toPole, int viaPole)
+        /// <summary>
+        /// Determines whether the specified number is even.
+        /// </summary>
+        /// <param name="num">The number to test.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified number is even; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool isEven(decimal num)
         {
-            if (countOfDisks == 1)
-            {
-                Console.Write("Move disk from pole " + fromPole + " to pole " + toPole);
-            }
-            else
-            {
-                TowerOfHanoi(countOfDisks - 1, fromPole, viaPole, toPole);
-                TowerOfHanoi(1, fromPole, toPole, viaPole);
-                TowerOfHanoi(countOfDisks - 1, viaPole, toPole, fromPole);
-            }
+            return num%2 == 0;
         }
+        /// <summary>
+        /// Determines whether the specified number is even.
+        /// </summary>
+        /// <param name="num">The number to test</param>
+        /// <returns>
+        ///   <c>true</c> if the specified number is even; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool isEven(int num)
+        {
+            return num % 2 ==0;
+        }
+
+        [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
+        public int AddEvenNumbersOnly(string commaSeperatedNumbers)
+        {
+            var split = commaSeperatedNumbers.Split(',').Select(val => int.Parse(val));
+            var evens = split.Where(i => i%2 == 0).ToList();
+            var sum = evens.Sum();
+
+            return sum;
+        }
+
 
         public static void MaxOccurance(int[] numbers)
         {
@@ -106,6 +126,16 @@ namespace SnipsSolution
                 tmp = tmp/10;
             }
             return total == number;
+        }
+
+        public static bool IsStringANumber(string input)
+        {
+            decimal val;
+            if (decimal.TryParse(input, out val))
+            {
+                return true;
+            }
+            return false;
         }
 
         public static bool IsPerfectNumber(long number)
@@ -192,5 +222,43 @@ namespace SnipsSolution
             }
             return true;
         }
+
+        public static string WordifyNumber(decimal val)
+        {
+            //Humanizer nuget does this and whole lot more
+            if (val == 0) return "zero";
+            if (val < 0)
+            {
+                return "- " + WordifyNumber(val);
+            }
+
+            var units = "|One|Two|Three|Four|Five|Six|Seven|Eight|Nine".Split('|');
+            var teens = "|eleven|twelve|thir#|four#|fif#|six#|seven#|eigh#|nine#".Replace("#", "teen").Split('|');
+            var tens = "|Ten|Twenty|Thirty|Forty|Fifty|Sixty|Seventy|Eighty|Ninety".Split('|');
+            var thou = "|Thousand|m#|b#|tr#|quadr#|quint#|sex#|sept#|oct#".Replace("#", "illion").Split('|');
+            var w = "";
+            var p = 0;
+            val = Math.Abs(val);
+            while (val > 0)
+            {
+                var b = (int)(val % 1000);
+                if (b > 0)
+                {
+                    var h = b / 100;
+                    var t = (b - h * 100) / 10;
+                    var u = b - h * 100 - t * 10;
+                    var s = (h > 0 ? units[h] + " Hundred" + (t > 0 | u > 0 ? " and " : "") : "") +
+                            (t > 0 ? t == 1 && u > 0 ? teens[u] : tens[t] + (u > 0 ? "-" : "") : "") +
+                            (t != 1 ? units[u] : "");
+                    s = ((val > 1000) && (h == 0) && (p == 0) ? " and " : val > 1000 ? ", " : "") + s;
+                    w = s + " " + thou[p] + w;
+                }
+                val = val / 1000;
+                p++;
+            }
+            return w;
+        }
+
+
     }
 }
