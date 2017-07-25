@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -17,12 +18,12 @@ namespace SnipsSolution
             Celsius,
             Kelvin
         }
-       private  double CelsiusToFahrenheit(double celsius)
+       internal double CelsiusToFahrenheit(double celsius)
        {
            return ((9.0/5.0)*celsius) + 32;
        }
 
-       private static double FahrenheitToCelsius(double fahrenheit)
+       internal static double FahrenheitToCelsius(double fahrenheit)
        {
            return (5.0/9.0)*(fahrenheit - 32);
        }
@@ -33,15 +34,14 @@ namespace SnipsSolution
        {
             double result = 0.0;
 
+           if (Equals(convertFrom, Measurement.Kelvin))
+           {
+               throw new ArgumentException("Cannot convert Kelvin to Kelvin", nameof(convertFrom));
+           }
+
            if (Equals(convertFrom,  Measurement.Celsius))
            {
-               if (num <= 0.0)
-               {
-                   result = Kelvin - num;
-               }else if (num > 0.0)
-               {
-                   result = num + Kelvin;
-               }
+              result = num + Kelvin;
            }
 
            if (Equals(convertFrom, Measurement.Fahrenheit))
@@ -56,13 +56,18 @@ namespace SnipsSolution
                 }
             }
 
-           return result;
+           return Math.Round(result,2);
        }
 
 
        public double ToCelsius(double input, Measurement convertFrom)
        {
             var result = 0.0;
+
+           if (Equals(convertFrom, Measurement.Celsius))
+           {
+               throw new ArgumentException("Cannot convert celsius to celsius", nameof(convertFrom));
+           }
             
             if (Equals(convertFrom, Measurement.Fahrenheit))
             {
@@ -76,12 +81,17 @@ namespace SnipsSolution
                 result = input - Kelvin;
             }
 
-            return result;
+            return Math.Round(result,2);
         }
 
        public double ToFahrenHeit(double input, Measurement convertFrom)
        {
            var result = 0.0;
+           if (Equals(convertFrom, Measurement.Fahrenheit))
+           {//if Enum is same as ToCall then return the number
+               throw new ArgumentException("Cannot convert from Fahrenheit(F) to Fahrenhiet(F)", nameof(convertFrom));
+           }
+
 
            if (Equals(convertFrom, Measurement.Celsius))
            {
@@ -94,8 +104,7 @@ namespace SnipsSolution
                result = 1.8*(input - Kelvin) + 32;
            }
 
-           return result;
-           
+           return Math.Round(result, 2);
        }
     }
 }
