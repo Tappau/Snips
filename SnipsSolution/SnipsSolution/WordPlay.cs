@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
 
 namespace SnipsSolution
@@ -158,7 +159,7 @@ namespace SnipsSolution
             Reverse(str, 0, n - 1);
         }
 
-        private static void Reverse(char[] str, int start, int end)
+        internal static void Reverse(char[] str, int start, int end)
         {
             while (start < end)
             {
@@ -168,11 +169,79 @@ namespace SnipsSolution
             }
         }
 
-        private static void Swap(char[] str, int start, int end)
+        internal static void Swap(char[] str, int start, int end)
         {
             var tmp = str[start];
             str[start] = str[end];
             str[end] = tmp;
         }
+
+        public static int IndexOfLongestCharacterRun(string s)
+        {
+            int bestIdx = 0, bestScore = 0, currentIdx = 0;
+            for (var i = 0; i < s.Length; ++i)
+            {
+                if (s[i] == s[currentIdx])
+                {
+                    if (bestScore >= i - currentIdx) continue;
+                    bestIdx = currentIdx;
+                    bestScore = i - currentIdx;
+                }
+                else
+                {
+                    currentIdx = i;
+                }
+            }
+            return bestIdx;
+        }
+
+        internal static bool IsAnagram(string a, string b)
+        {
+            //ANAGRAMS must be same length
+            //Validate the strings are not empty or not same length
+            if (string.IsNullOrWhiteSpace(a) || string.IsNullOrWhiteSpace(b)) return false;
+            if (a.Length != b.Length) return false;
+
+            var letters = new int[256];
+            var aArray = a.ToCharArray();
+            foreach (var c in aArray)
+            {
+                letters[c]++;
+            }
+            foreach (var c in b)
+            {
+                if (--letters[c] < 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static string GetAngrams(string s)
+        {
+            var arrayOfWords = s.Split('\n', '\r', ' ');
+            return GetAnagrams(arrayOfWords);
+
+        }
+
+
+        public static string GetAnagrams(string[] wordsArray)
+        {
+            var result = "";
+
+            for (var i = 0; i < wordsArray.Length; i++)
+            {
+                for (var j = i + 1; j < wordsArray.Length; j++)
+                {
+                    if (IsAnagram(wordsArray[i], wordsArray[j]))
+                    {
+                        result += wordsArray[i] + " is anagram of: " + wordsArray[j] + "\n";
+                    }
+                }
+            }
+            return result;
+        }
+
     }
 }
