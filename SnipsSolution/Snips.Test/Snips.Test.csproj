@@ -41,6 +41,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemperatureTests.cs" />
     <Compile Include="WorkingDaysTest.cs" />
+    <Compile Include="ExtensionTests\RomanNumeralTests.cs" />
+    <Compile Include="ExtensionTests\StringExtensionsTest.cs" />
+    <Compile Include="ExtensionTests\DataExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -50,6 +53,9 @@
       <Project>{d6786c1e-2768-430a-be4e-24ef06b228ab}</Project>
       <Name>SnipsSolution</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ExtensionTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

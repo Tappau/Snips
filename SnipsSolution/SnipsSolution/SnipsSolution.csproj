@@ -48,9 +48,17 @@
     <Compile Include="Validation.cs" />
     <Compile Include="WordPlay.cs" />
     <Compile Include="WorkingDays.cs" />
+    <Compile Include="Extensions\HelperExtensions.cs" />
+    <Compile Include="Extensions\RomanNumeralExtensions.cs" />
+    <Compile Include="Extensions\NumberExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\DataExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

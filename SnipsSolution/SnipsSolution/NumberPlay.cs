@@ -9,7 +9,7 @@ namespace SnipsSolution
     public class NumberPlay
     {
         /// <summary>
-        ///     Calculates the Greatest Common Dvisor of two numbers
+        ///     Calculates the Greatest Common Divisor of two numbers
         /// </summary>
         /// <returns>The Greatest Common Divisor</returns>
         /// <param name="num1">Num1.</param>
@@ -78,7 +78,7 @@ namespace SnipsSolution
         /// </returns>
         public static bool isEven(int num)
         {
-            return num % 2 ==0;
+            return num % 2 == 0;
         }
 
         [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
