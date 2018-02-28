@@ -43,11 +43,11 @@ namespace Snips.Test.Extensions
         /// <param name="expected">Expected.</param>
         [Test]
         [TestCase("IV", 4)]
-        [TestCase("MMXIII", 2018)]
+        [TestCase("MMXVIII", 2018)]
         [TestCase("CLXXXVII", 187)]
         public void ShouldReturnIntegerOfString(string toConvert, int expected){
             var outcome = toConvert.ParseRomanNumeral();
-            Assert.AreSame(expected, outcome);
+            Assert.AreEqual(expected, outcome);
         }
         /// <summary>
         /// Test to check that an integer is converted to Roman Numeral
@@ -56,16 +56,16 @@ namespace Snips.Test.Extensions
         /// <param name="expected">Expected.</param>
         [Test]
         [TestCase(4, "IV")]
-        [TestCase(2018, "MMXIII")]
+        [TestCase(2018, "MMXVIII")]
         [TestCase(187,"CLXXXVII")]
         public void MakeInteger_To_String(int num, string expected){
             var outcome = num.ToRomanNumeralString();
-            Assert.AreSame(expected, outcome);
+            Assert.AreEqual(expected, outcome);
         }
 
         [Test]
         public void IntegerToString(){
-            Assert.AreEqual(2018.ToRomanNumeralString(), "MMXIII");
+            Assert.AreEqual(2018.ToRomanNumeralString(), "MMXVIII");
         }
     }
 }
