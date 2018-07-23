@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
+
 namespace SnipsSolution.Extensions
 {
     public static class StringExtensions
@@ -61,7 +64,7 @@ namespace SnipsSolution.Extensions
         /// <typeparam name="T">Any object type.</typeparam>
         public static string ToXml<T>(this T obj) where T : class, new()
         {
-            if (obj == null) throw new ArgumentNullException("xml");
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
             var serialiser = new XmlSerializer(typeof(T));
             using (var writer = new StringWriter())
@@ -77,22 +80,52 @@ namespace SnipsSolution.Extensions
         /// <returns>A new object of type T if successful, null if failed.</returns>
         /// <param name="xml">XML as string to deserialise from</param>
         /// <typeparam name="T">Any class type.</typeparam>
-        public static T ParseTo<T>(this string xml) : where T : class, new()
+        public static T ParseXmlTo<T>(this string xml) where T : class, new()
         {
-            if(xml == null) throw new ArgumentNullException("xml");
+            if (string.IsNullOrWhiteSpace(xml))
+            {
+                throw new ArgumentNullException(nameof(xml));
+            }
 
-        var serialiser = new XmlSerializer(typeof(T));
-            using(var reader = new Stringreader(xml)){
-                try {
+            var serialiser = new XmlSerializer(typeof(T));
+            using (var reader = new StreamReader(xml))
+            {
+                try
+                {
                     return (T) serialiser.Deserialize(reader);
-                } catch (Exception ex) {
-                    return null; //Not able to deserialise to type.
                 }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the Nth <paramref name="occurance"/> of specified <paramref name="match"/>
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="match"></param>
+        /// <param name="occurance"></param>
+        /// <returns>Returns index value, -1 if not found.</returns>
+        public static int NthIndexOf(this string str, string match, int occurance)
+        {
+            var i = 1;
+            var index = 0;
+
+            while (i <= occurance && (index = str.IndexOf(match, index + 1)) != 1)
+            {
+                if (i == occurance)
+                {
+                    //ooccurance match found
+                    return index;
+                }
+
+                i++;
+            }
             
-        }}
-    
-
-
-
-}
+            //No matchs
+            return -1;
+        }
+    }
 }
