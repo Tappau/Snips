@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security;
 using System.Xml.Serialization;
 
 namespace SnipsSolution.Extensions
@@ -126,6 +127,81 @@ namespace SnipsSolution.Extensions
             
             //No matchs
             return -1;
+        }
+        /// <summary>
+        /// Removes the last character of a string
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static string RemoveLastCharacter(this string val)
+        {
+            if(string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            return val.Substring(0, val.Length - 1);
+        }
+
+        /// <summary>
+        /// Remove the last 'N' characters
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="charsToRemove">Count of characters to remove from end</param>
+        /// <returns></returns>
+        public static string RemoveLast(this string val, int charsToRemove)
+        {
+            if(string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            return val.Substring(0, val.Length - charsToRemove);
+        }
+
+        /// <summary>
+        /// Remove first character of a string
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static string RemoveFirstCharacter(this string val)
+        {
+            if(string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            return val.Substring(1);
+        }
+
+        /// <summary>
+        /// Remove first 'N' characters
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="charsToRemove">Count of chars to remove from begining</param>
+        /// <returns></returns>
+        public static string RemoveFirst(this string val, int charsToRemove)
+        {
+            if(string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            return val.Substring(charsToRemove);
+        }
+
+        /// <summary>
+        /// Convert a string number to integer. If not able to convert will return -1.
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static int ToInt(this string val)
+        {
+            if (!int.TryParse(val, out var result))
+            {
+                result = -1;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Convert string to a double, if not able will return -1.
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static double ToDouble(this string val)
+        {
+            if (!double.TryParse(val, out var result))
+            {
+                result = -1;
+            }
+
+            return result;
         }
     }
 }
