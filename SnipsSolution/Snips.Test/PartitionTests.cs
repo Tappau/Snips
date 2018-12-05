@@ -33,10 +33,10 @@ namespace Snips.Test
         }
 
         [TestCase(new[] {1}, new int[0], new[] {1})]
-        [TestCase(new[] {1, -2}, new int[] {-2}, new[] {1})]
-        [TestCase(new[] {0, 0, 0}, new int[] {0, 0, 0}, new int[0])]
+        [TestCase(new[] {1, -2}, new[] {-2}, new[] {1})]
+        [TestCase(new[] {0, 0, 0}, new[] {0, 0, 0}, new int[0])]
         [TestCase(new[] {1, 3, 5}, new int[0], new[] {1, 3, 5})]
-        [TestCase(new[] {1, 2, 3, 4, 5}, new int[] {2, 4}, new[] {1, 3, 5})]
+        [TestCase(new[] {1, 2, 3, 4, 5}, new[] {2, 4}, new[] {1, 3, 5})]
         public void CorrectlyPartition_GivenSequenceOfNumbersInto_EvenAndOdds(int[] numbers, int[] expectedEvens,
             int[] expectedOdds)
         {

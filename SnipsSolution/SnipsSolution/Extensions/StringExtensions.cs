@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Security;
 using System.Xml.Serialization;
 
 namespace SnipsSolution.Extensions
@@ -89,7 +88,7 @@ namespace SnipsSolution.Extensions
             }
 
             var serialiser = new XmlSerializer(typeof(T));
-            using (var reader = new StreamReader(xml))
+            using (var reader = new StringReader(xml))
             {
                 try
                 {
@@ -104,6 +103,7 @@ namespace SnipsSolution.Extensions
 
         /// <summary>
         /// Gets the Nth <paramref name="occurance"/> of specified <paramref name="match"/>
+        /// This is case sensitive.
         /// </summary>
         /// <param name="str"></param>
         /// <param name="match"></param>
@@ -114,7 +114,7 @@ namespace SnipsSolution.Extensions
             var i = 1;
             var index = 0;
 
-            while (i <= occurance && (index = str.IndexOf(match, index + 1)) != 1)
+            while (i <= occurance && (index = str.IndexOf(match, index + 1, StringComparison.Ordinal)) != 1)
             {
                 if (i == occurance)
                 {
@@ -145,7 +145,7 @@ namespace SnipsSolution.Extensions
         /// <param name="val"></param>
         /// <param name="charsToRemove">Count of characters to remove from end</param>
         /// <returns></returns>
-        public static string RemoveLast(this string val, int charsToRemove)
+        public static string RemoveLast(this string val, int charsToRemove =0)
         {
             if(string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
             return val.Substring(0, val.Length - charsToRemove);
@@ -168,7 +168,7 @@ namespace SnipsSolution.Extensions
         /// <param name="val"></param>
         /// <param name="charsToRemove">Count of chars to remove from begining</param>
         /// <returns></returns>
-        public static string RemoveFirst(this string val, int charsToRemove)
+        public static string RemoveFirst(this string val, int charsToRemove = 0)
         {
             if(string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
             return val.Substring(charsToRemove);

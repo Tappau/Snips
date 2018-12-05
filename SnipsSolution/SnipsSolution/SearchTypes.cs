@@ -17,7 +17,7 @@
         {
             var lo = 0;
             // ReSharper disable once TooWideLocalVariableScope
-            var mid = -1;
+            int mid;
             var hi = list.Length - 1;
             var index = -1;
 

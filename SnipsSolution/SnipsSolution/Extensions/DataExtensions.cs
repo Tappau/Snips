@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 
 namespace SnipsSolution.Extensions
@@ -15,8 +14,8 @@ namespace SnipsSolution.Extensions
             }
         }
 
-        /// <summary>
-        /// Returns a string seperated by given seperator, of a given IEnumerable<T>"/>
+        /// <summary T="&quot;/&gt;">
+        /// Returns a string seperated by given seperator, of a given IEnumerable
         /// </summary>
         /// <returns>The csv string</returns>
         /// <param name="instance">List of items</param>

@@ -4,7 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using SnipsSolution.Extensions;
 
-namespace Snips.Test
+namespace Snips.Test.ExtensionTests
 {
     [TestFixture]
     public class HasAtLeastTests
@@ -14,8 +14,7 @@ namespace Snips.Test
         [Test]
         public static void Throws_ArgumentNullException_When_Sequence_Is_Null()
         {
-            IEnumerable<object> nullEnumerable = null;
-            Assert.Throws<ArgumentNullException>(() => nullEnumerable.HasAtLeast(1));
+            Assert.Throws<ArgumentNullException>(() => ((IEnumerable<object>) null).HasAtLeast(1));
         }
 
         [Test]

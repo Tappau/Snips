@@ -5,69 +5,47 @@ namespace SnipsSolution.Extensions
 {
     public static class DateTimeExtensions
     {
-        /// <summary>
-        /// Checks if date specified is in future.
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="from"></param>
-        /// <returns></returns>
-        public static bool IsFuture(this DateTime date, DateTime from)
+        public static DateTime DateTimeNow => DateTime.Now;
+
+        public static DateTime DateTimeUtcNow
         {
-            return date.Date > from.Date;
+            get => DateTime.UtcNow;
+            set => throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Checks if date is in future from current time.
+        ///     Checks if date is in future from current time.
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
         public static bool IsFuture(this DateTime date)
         {
-            return date.IsFuture(DateTime.Now);
+            return date.Date > DateTimeNow;
         }
 
         /// <summary>
-        ///Checks if date is in past. If no parameter checks against current time.
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="from"></param>
-        /// <returns></returns>
-        public static bool IsPast(this DateTime date, DateTime from)
-        {
-            return date.Date < from.Date;
-        }
-
-        /// <summary>
-        ///Check if date is in past of current time.
+        ///     Check if date is in past of current time.
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
         public static bool IsPast(this DateTime date)
         {
-            return date.IsPast(DateTime.Now);
+            return date.Date < DateTimeNow;
         }
 
         /// <summary>
-        /// Returns number of month from string representation.
+        ///     Returns number of month from string representation.
         /// </summary>
-        /// <param name="dateTime"></param>
         /// <param name="month"></param>
         /// <returns></returns>
-        public static int ToMonthNumber(this DateTime dateTime, string month)
+        public static int ToMonthNumber(this string month)
         {
-            month = month.ToLower();
-            for (var i = 1; i <= 12; i++)
-            {
-                var _dt = DateTime.Parse("1." + i + ".2000");
-                var _month = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i).ToLower();
-                if (_month == month) return i;
-            }
-
-            return 0;
+            return Array.FindIndex(CultureInfo.CurrentCulture.DateTimeFormat.MonthNames,
+                       mon => mon.Equals(month, StringComparison.CurrentCultureIgnoreCase)) + 1;
         }
 
         /// <summary>
-        /// Checks if data is between two given datetimes
+        ///     Checks if date is between two given datetimes
         /// </summary>
         /// <param name="dt">Datetime to check</param>
         /// <param name="rangeBeg">Earlier Date</param>
@@ -85,8 +63,8 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static int CalculateAge(this DateTime dateTime)
         {
-            var age = DateTime.Now.Year - dateTime.Year;
-            if (DateTime.Now < dateTime.AddYears(age))
+            var age = DateTimeNow.Year - dateTime.Year;
+            if (DateTimeNow < dateTime.AddYears(age))
                 age--;
             return age;
         }
@@ -99,7 +77,7 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static string ToReadableTime(this DateTime value)
         {
-            var ts = new TimeSpan(DateTime.UtcNow.Ticks - value.Ticks);
+            var ts = new TimeSpan(DateTimeUtcNow.Ticks - value.Ticks);
             var delta = ts.TotalSeconds;
             if (delta < 60) return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
             if (delta < 120) return "a minute ago";
@@ -150,20 +128,31 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static DateTime NextWorkDay(this DateTime date)
         {
-            var nextday = date;
-            while (!nextday.IsWorkingDay()) nextday = nextday.AddDays(1);
+            DateTime nextDay;
+            if (date.IsWorkingDay())
+            {
+                nextDay = date.AddDays(1);
+                while (nextDay.IsWeekend()) nextDay = nextDay.AddDays(1);
+                return nextDay;
+            }
 
-            return nextday;
+            nextDay = date.AddDays(1);
+            while (nextDay.IsWeekend())
+            {
+                nextDay = nextDay.AddDays(1);
+            }
+
+            return nextDay;
         }
 
         /// <summary>
         ///     Get the date of the next day of week specified.
-        ///     <param name="dayOfWeek"></param>
+        ///     e.g Get the following Tuesday.
         /// </summary>
         /// <param name="current"></param>
         /// <param name="dayOfWeek"></param>
         /// <returns></returns>
-        public static DateTime Next(this DateTime current, DayOfWeek dayOfWeek)
+        public static DateTime GetNextDay(this DateTime current, DayOfWeek dayOfWeek)
         {
             var offSet = dayOfWeek - current.DayOfWeek;
             if (offSet <= 0) offSet += 7;

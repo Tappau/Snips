@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SnipsSolution.Extensions;
 
 namespace Snips.Test.ExtensionTests
@@ -10,7 +9,7 @@ namespace Snips.Test.ExtensionTests
         [Test]
         public void ToCSV_Should_Return_Correct_Comma_Seperated_Values(){
             var values = new[] { 1, 2, 3, 4, 5 };
-            string csv = values.ToCsv();
+            var csv = values.ToCsv();
 
             Assert.AreEqual("1,2,3,4,5", csv);
         }

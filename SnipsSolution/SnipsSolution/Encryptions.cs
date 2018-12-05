@@ -52,7 +52,7 @@ namespace SnipsSolution
         {
             const uint seed = 131;
             uint hash = 0;
-            uint i = 0;
+            uint i;
 
             for (i = 0; i < toHash.Length; i++)
             {
@@ -72,7 +72,7 @@ namespace SnipsSolution
         public static uint SDBMHash(string str)
         {
             uint hash = 0;
-            uint i = 0;
+            uint i;
             for (i = 0; i < str.Length; i++)
             {
                 hash = (byte) str[(int) i] + (hash << 6) + (hash << 16) - hash;

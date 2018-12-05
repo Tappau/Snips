@@ -1,5 +1,4 @@
-﻿using System;
-namespace SnipsSolution.Extensions
+﻿namespace SnipsSolution.Extensions
 {
     public static class NumberExtensions
     {

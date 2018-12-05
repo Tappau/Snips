@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace SnipsSolution.Extensions
 {
@@ -27,6 +24,19 @@ namespace SnipsSolution.Extensions
         public static Guid NewGuidIfEmpty(this Guid value)
         {
             return (value != Guid.Empty ? value : Guid.NewGuid());
+        }
+
+        /// <summary>
+        /// Check if a given date is UK format.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsUkDateFormat(this string value)
+        {
+            if(string.IsNullOrWhiteSpace(value)){throw new ArgumentNullException(nameof(value), $"{nameof(value)} cannot be null, whitespace or empty.");}
+
+            string[] validFormats = { "dd/MM/yyyy", "dd/MM/yy", "MM/yy", "MM/yyyy", "d/M/yy", "d/M/yyyy", "dd/M/yy", "dd/M/yyyy" };
+            return DateTime.TryParseExact(value,validFormats,CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
         }
 
         

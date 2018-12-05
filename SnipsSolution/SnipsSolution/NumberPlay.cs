@@ -130,12 +130,7 @@ namespace SnipsSolution
 
         public static bool IsStringANumber(string input)
         {
-            decimal val;
-            if (decimal.TryParse(input, out val))
-            {
-                return true;
-            }
-            return false;
+            return decimal.TryParse(input, out _);
         }
 
         public static bool IsPerfectNumber(long number)

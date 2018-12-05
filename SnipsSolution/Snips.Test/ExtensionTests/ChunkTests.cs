@@ -4,7 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using SnipsSolution.Extensions;
 
-namespace Snips.Test
+namespace Snips.Test.ExtensionTests
 {
     [TestFixture]
     public class ChunkTests

@@ -42,7 +42,7 @@
         {
             var left = (index + 1)*2 - 1;
             var right = (index + 1)*2;
-            var largest = 0;
+            int largest;
 
             if (left < heapSize && data[left] > data[index])
             {

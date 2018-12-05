@@ -4,10 +4,10 @@ namespace SnipsSolution
 {
     public class Validation
     {
-        public static bool CheckPassword(string pass)
+        public bool CheckPassword (string pass)
         {
             //min 6 chars, max 12
-            if (pass.Length < 6 || pass.Length > 12)
+            if (pass.Length < 6 || pass.Length > 32)
                 return false;
 
             //No white space
@@ -17,15 +17,8 @@ namespace SnipsSolution
             if (!pass.Any(char.IsUpper))
                 return false;
             //At least 1 lower case
-            if (!pass.All(char.IsLower))
+            if (!pass.Any(char.IsLower))
                 return false;
-
-            //No two similar characters consecutively
-            for (var i = 0; i < pass.Length - 1; i++)
-            {
-                if (pass[i] == pass[i + 1])
-                    return false;
-            }
 
             //At least 1 special character
             var specialCharacters = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-" + "\"";
@@ -39,5 +32,7 @@ namespace SnipsSolution
             }
             return false;
         }
+
+        
     }
 }
