@@ -13,18 +13,9 @@ Filename    Path                      LineNumber IsBinary Matches
 File_01.txt E:\Temp\Files\File_01.txt          1    False {Test01}
 File_02.txt E:\Temp\Files\File_02.txt          1    False {TEST01}
 File_03.txt E:\Temp\Files\File_03.txt          1    False {TeST01}
-
-.EXAMPLE  
-Find-StringInFile -Path "C:\Scripts\FolderWithFiles" -Search "TEST01" -CaseSensitive
-Filename    Path                      LineNumber IsBinary Matches
---------    ----                      ---------- -------- -------
-File_02.txt E:\Temp\Files\File_02.txt          1    False {TEST01}
-	
 #>
-
 function Find-StringInFile
 {
-	[CmdletBinding()]
 	param(
 	[Parameter(
 			Position=0,
@@ -52,11 +43,6 @@ function Find-StringInFile
 			HelpMessage="String must be case sensitive (Default=false)")]
 		[switch]$CaseSensitive
 	)
-
-	Begin{
-		
-	}
-
 	Process{
 		# Files with string to find
 		$Strings = Get-ChildItem -Path $Path -Recurse | Select-String -Pattern ([regex]::Escape($Search)) -CaseSensitive:$CaseSensitive | Group-Object -Property Path 
@@ -78,9 +64,5 @@ function Find-StringInFile
 				}
 			}   
 		}
-	}
-
-	End{
-		
 	}
 }
