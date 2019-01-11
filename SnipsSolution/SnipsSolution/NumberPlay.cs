@@ -254,6 +254,17 @@ namespace SnipsSolution
             return w;
         }
 
+        public static int CalculateAge(DateTime dob){
 
+            return (int.Parse(DateTime.UtcNow.Date.ToString("yyyyMMdd")) - int.Parse(dob.ToString("yyyyMMdd"))) / 10000;
+
+            //int now = int.Parse(DateTime.UtcNow.Date.ToString("yyyyMMdd"));
+            //int givendob = int.Parse(dob.ToString("yyyyMMdd"));
+            //return (now - givendob) / 10000;
+        }
+
+        public static int CalculateAge(string dob){
+            return CalculateAge(DateTime.Parse(dob));
+        }
     }
 }
