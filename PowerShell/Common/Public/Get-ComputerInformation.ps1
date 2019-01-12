@@ -14,20 +14,15 @@ function Get-ComputerInformation {
 
         ##Prepare some output
         $Properties = @{
-            ComputerName = $ComputerName
-            Manufacturer = $ComputerSystem.Manufacturer
-            Model = $ComputerSystem.Model
-            OperatingSystem = $OperatingSystem.Caption
+            ComputerName          = $ComputerName
+            Manufacturer          = $ComputerSystem.Manufacturer
+            Model                 = $ComputerSystem.Model
+            OperatingSystem       = $OperatingSystem.Caption
             OpertingSystemVersion = $OperatingSystem.Version
-            SerialNumber = $Bios.SerialNumber
-
-
+            SerialNumber          = $Bios.SerialNumber
         }
 
         ##Output results
         New-Object -typename PSobject -property $Propertiess
-     }
-    
-    end {
     }
 }
