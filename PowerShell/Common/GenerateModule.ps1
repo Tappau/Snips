@@ -1,4 +1,4 @@
-$Path = "C:\Users\Calvin\Source\Repos\Snips\PowerShell"
+$Path = "...\Snips\PowerShell"
 $ModuleName = "Common"
 $Author = "Tappau"
 $Description = "Powershell module of helpful tasks, I've required at somepoint"
