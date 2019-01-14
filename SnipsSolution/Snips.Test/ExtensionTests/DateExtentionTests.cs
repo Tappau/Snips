@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using SnipsSolution;
 using SnipsSolution.Extensions;
 
 namespace Snips.Test.ExtensionTests
@@ -42,13 +43,14 @@ namespace Snips.Test.ExtensionTests
             Assert.AreEqual(expected, testMonthName.ToMonthNumber());
         }
 
-        [TestCase("15/06/1962")]
-        [TestCase("30/11/1989")]
-        public void Test_CalculateAge_ToCurrentDate(string testDate)
+        [TestCase("15/06/1962", 56)]
+        [TestCase("30/11/1989", 29)]
+        public void Test_CalculateAge_ToCurrentDate(string testDate, int expectedResult)
         {
-            var date = DateTime.Parse(testDate);
-            var age = DateTime.Now.Year - date.Year;
-            Assert.AreEqual(age, date.CalculateAge());
+            using (Clock.NowIs(new DateTime(2019, 01, 01)))
+            {
+                Assert.AreEqual(expectedResult, DateTime.Parse(testDate).CalculateAge());
+            }
         }
 
         [TestCase("2018-12-05", true)] //Wednesday
@@ -144,6 +146,28 @@ namespace Snips.Test.ExtensionTests
         public void Test_OrdinalSuffix(DateTime testDate, string expected)
         {
             Assert.AreEqual(expected, testDate.OrdinalSuffix());
+        }
+
+        
+        [TestCase("2019-01-14 11:00:00", "an hour ago")]
+        [TestCase("2019-01-14 10:00:00", "2 hours ago")]
+        [TestCase("2019-01-14 11:59:59", "one second ago")]
+        [TestCase("2019-01-14 11:59:55", "5 seconds ago")]
+        [TestCase("2019-01-14 11:59:00", "a minute ago")]
+        [TestCase("2019-01-14 11:55:00", "5 minutes ago")]
+        [TestCase("2019-01-13 12:00:00", "yesterday")]
+        [TestCase("2019-01-12 12:00:00", "2 days ago")]
+        [TestCase("2018-12-14 12:00:00", "one month ago")]
+        [TestCase("2018-11-14 12:00:00", "2 months ago")]
+        [TestCase("2018-01-14 12:00:00", "one year ago")]
+        [TestCase("2009-01-14 12:00:00", "10 years ago")]
+        public void Test_ToReadableTime(DateTime testDate, string expected)
+        {
+            using (Clock.UtcNowIs(new DateTime(2019, 01, 14, 12, 0, 0)))
+            {
+                var result = testDate.ToReadableTime();
+                Assert.AreEqual(expected, result);
+            }
         }
     }
 }

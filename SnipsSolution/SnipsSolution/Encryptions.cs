@@ -68,16 +68,5 @@ namespace SnipsSolution
             //Output
             //3255416723
         }
-
-        public static uint SDBMHash(string str)
-        {
-            uint hash = 0;
-            uint i;
-            for (i = 0; i < str.Length; i++)
-            {
-                hash = (byte) str[(int) i] + (hash << 6) + (hash << 16) - hash;
-            }
-            return hash;
-        }
     }
 }

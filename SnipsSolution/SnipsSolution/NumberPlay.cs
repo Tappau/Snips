@@ -23,6 +23,7 @@ namespace SnipsSolution
                 if (num2 > num1)
                     num2 = num2 - num1;
             }
+
             return num1;
         }
 
@@ -39,44 +40,44 @@ namespace SnipsSolution
                     LCM(a,b) = (a * b)/ GCD(a,b)
                     
 */
-            return num1*num2/GetGCD(num1, num2);
+            return num1 * num2 / GetGCD(num1, num2);
         }
 
         public static string GetFizzBuzz()
         {
             var result = "";
             for (var i = 1; i < 101; i++)
-            {
-                if ((i%3 == 0) && (i%5 == 0))
+                if (i % 3 == 0 && i % 5 == 0)
                     result += "FizzBuzz" + Environment.NewLine;
-                else if (i%3 == 0)
+                else if (i % 3 == 0)
                     result += "Fizz" + Environment.NewLine;
-                else if (i%5 == 0)
+                else if (i % 5 == 0)
                     result += "Buzz" + Environment.NewLine;
                 else
                     result += i + Environment.NewLine;
-            }
             return result;
         }
+
         /// <summary>
-        /// Determines whether the specified number is even.
+        ///     Determines whether the specified number is even.
         /// </summary>
         /// <param name="num">The number to test.</param>
         /// <returns>
-        ///   <c>true</c> if the specified number is even; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified number is even; otherwise, <c>false</c>.
         /// </returns>
-        public static bool isEven(decimal num)
+        public static bool IsEven(decimal num)
         {
-            return num%2 == 0;
+            return num % 2 == 0;
         }
+
         /// <summary>
-        /// Determines whether the specified number is even.
+        ///     Determines whether the specified number is even.
         /// </summary>
         /// <param name="num">The number to test</param>
         /// <returns>
-        ///   <c>true</c> if the specified number is even; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified number is even; otherwise, <c>false</c>.
         /// </returns>
-        public static bool isEven(int num)
+        public static bool IsEven(int num)
         {
             return num % 2 == 0;
         }
@@ -85,7 +86,7 @@ namespace SnipsSolution
         public int AddEvenNumbersOnly(string commaSeperatedNumbers)
         {
             var split = commaSeperatedNumbers.Split(',').Select(val => int.Parse(val));
-            var evens = split.Where(i => i%2 == 0).ToList();
+            var evens = split.Where(i => IsEven(i)).ToList();
             var sum = evens.Sum();
 
             return sum;
@@ -97,20 +98,19 @@ namespace SnipsSolution
             var counts = new Dictionary<int, int>();
             foreach (var num in numbers)
             {
-                int count;
-                counts.TryGetValue(num, out count);
+                counts.TryGetValue(num, out var count);
                 count++;
                 counts[num] = count;
             }
+
             int mostCommonNumber = 0, occurrences = 0;
             foreach (var pair in counts)
-            {
                 if (pair.Value > occurrences)
                 {
                     occurrences = pair.Value;
                     mostCommonNumber = pair.Key;
                 }
-            }
+
             Console.WriteLine("The Most common number is {0} and it appears {1} times.", mostCommonNumber, occurrences);
         }
 
@@ -121,10 +121,11 @@ namespace SnipsSolution
             var tmp = number;
             for (var i = 0; i < digitsCount; i++)
             {
-                var digit = tmp%10;
+                var digit = tmp % 10;
                 total += (int) Math.Pow(digit, digitsCount);
-                tmp = tmp/10;
+                tmp = tmp / 10;
             }
+
             return total == number;
         }
 
@@ -137,28 +138,23 @@ namespace SnipsSolution
         {
             //odd Perfects number do not exist so check its even
 
-            if (number%2 == 1)
-            {
-                return false;
-            }
+            if (number % 2 == 1) return false;
             long result = 1;
             long i = 2;
 
-            while (i*i <= number)
+            while (i * i <= number)
             {
 //until i <= sqrt(number)
-                if (number%i == 0)
+                if (number % i == 0)
                 {
                     result += i;
-                    result += number/i;
+                    result += number / i;
                 }
+
                 i++;
             }
-            if (i*i == number)
-            {
-//perfect square, sqrt(number) was added twice
-                result -= i;
-            }
+
+            if (i * i == number) result -= i;
             return result == number;
         }
 
@@ -172,19 +168,16 @@ namespace SnipsSolution
         /// <param name="c">C</param>
         public static double[] SolveQuadraticEquation(double a, double b, double c)
         {
-            var d = b*b - 4*a*c; //discriminant
-            if (d < 0)
-            {
-                return null;
-            }
+            var d = b * b - 4 * a * c; //discriminant
+            if (d < 0) return null;
             if (Equals(d, 0))
             {
-                double[] result = {-b/2*a};
+                double[] result = {-b / 2 * a};
                 return result;
             }
             else
             {
-                double[] result = {(-b + Math.Sqrt(d))/(2*a), (-b - Math.Sqrt(d))/(2*a)};
+                double[] result = {(-b + Math.Sqrt(d)) / (2 * a), (-b - Math.Sqrt(d)) / (2 * a)};
                 return result;
             }
         }
@@ -195,9 +188,10 @@ namespace SnipsSolution
             double result = 1;
             while (number != 1)
             {
-                result = result*number;
+                result = result * number;
                 number = number - 1;
             }
+
             return result;
         }
 
@@ -205,16 +199,14 @@ namespace SnipsSolution
         {
             if (num <= 1)
                 return false;
-            if (num%2 == 0)
+            if (num % 2 == 0)
                 return num == 2;
 
             var N = (long) (Math.Sqrt(num) + 0.5);
 
             for (var i = 3; i <= N; i += 2)
-            {
-                if (num%i == 0)
+                if (num % i == 0)
                     return false;
-            }
             return true;
         }
 
@@ -222,10 +214,7 @@ namespace SnipsSolution
         {
             //Humanizer nuget does this and whole lot more
             if (val == 0) return "zero";
-            if (val < 0)
-            {
-                return "- " + WordifyNumber(val);
-            }
+            if (val < 0) return "- " + WordifyNumber(val);
 
             var units = "|One|Two|Three|Four|Five|Six|Seven|Eight|Nine".Split('|');
             var teens = "|eleven|twelve|thir#|four#|fif#|six#|seven#|eigh#|nine#".Replace("#", "teen").Split('|');
@@ -236,26 +225,28 @@ namespace SnipsSolution
             val = Math.Abs(val);
             while (val > 0)
             {
-                var b = (int)(val % 1000);
+                var b = (int) (val % 1000);
                 if (b > 0)
                 {
                     var h = b / 100;
                     var t = (b - h * 100) / 10;
                     var u = b - h * 100 - t * 10;
-                    var s = (h > 0 ? units[h] + " Hundred" + (t > 0 | u > 0 ? " and " : "") : "") +
+                    var s = (h > 0 ? units[h] + " Hundred" + ((t > 0) | (u > 0) ? " and " : "") : "") +
                             (t > 0 ? t == 1 && u > 0 ? teens[u] : tens[t] + (u > 0 ? "-" : "") : "") +
                             (t != 1 ? units[u] : "");
-                    s = ((val > 1000) && (h == 0) && (p == 0) ? " and " : val > 1000 ? ", " : "") + s;
+                    s = (val > 1000 && h == 0 && p == 0 ? " and " : val > 1000 ? ", " : "") + s;
                     w = s + " " + thou[p] + w;
                 }
+
                 val = val / 1000;
                 p++;
             }
+
             return w;
         }
 
-        public static int CalculateAge(DateTime dob){
-
+        public static int CalculateAge(DateTime dob)
+        {
             return (int.Parse(DateTime.UtcNow.Date.ToString("yyyyMMdd")) - int.Parse(dob.ToString("yyyyMMdd"))) / 10000;
 
             //int now = int.Parse(DateTime.UtcNow.Date.ToString("yyyyMMdd"));
@@ -263,7 +254,8 @@ namespace SnipsSolution
             //return (now - givendob) / 10000;
         }
 
-        public static int CalculateAge(string dob){
+        public static int CalculateAge(string dob)
+        {
             return CalculateAge(DateTime.Parse(dob));
         }
     }
