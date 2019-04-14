@@ -2,7 +2,7 @@
 .SYNOPSIS
     Execute provided SQL against provided Server Instance accepts parameters 
 .DESCRIPTION
-    Will execute SQL against instance, If UserName and password are not provided then will use integrated security
+    Will execute SQL against instance, If UserName and password are not provided then integrated security is used.
     if TargetDatabase not provided then query should contain fully qualified paths for query.
 .PARAMETER ServerInstance
     Name of instance to execute against
@@ -11,13 +11,13 @@
 .PARAMETER Parameters
     Dictionary of parameter names and values.
 .PARAMETER TargetDatabase
-    If Provided will define Target Database parameter on connection string
+    If Provided will define 'Initial Catalog' parameter on connection string
+.PARAMETER NonQuery
+    States that this query does not return results i.e. Action Queries (CREATE, ALTER, DROP, INSERT, UPDATE, DELETE)
 .PARAMETER UserName
     User to execute as
 .PARAMETER Password
     SecureString password to utilise
-.PARAMETER NonQuery
-    States that this query does not return results i.e. Action Queries (CREATE, ALTER, DROP, INSERT, UPDATE, DELETE)
 .EXAMPLE
     Invoke-Sql -ServerInstance localhost\sqlexpress -Query "SELECT * FROM Person"
     Will execute and return object of results
@@ -26,6 +26,9 @@
     Will execute the query and return object of the results
 .EXAMPLE
     Invoke-Sql -ServerInstance localhost\sqlexpress -Query "INSERT INTO Person(FirstName, LastName) VALUES('Jane', 'Doe')" -NonQuery
+    Will execute returning if number of rows affected.
+.EXAMPLE
+    Invoke-Sql -ServerInstance localhost\sqlexpress -Query "INSERT INTO Person(FirstName, LastName) VALUES(@fname, @lname)" -Parameter @{fname='Jane'; lname='Doe'} -NonQuery
     Will execute returning if number of rows affected.
 .NOTES
     Only executable against Microsoft SQL Server instances.
@@ -45,14 +48,14 @@ function Invoke-Sql {
         [parameter(Mandatory = $false)]
         [string] $TargetDatabase,
 
+        [parameter(Mandatory = $false)]
+        [switch] $NonQuery,
+
         [parameter(HelpMessage = "UserName to use")]
         [string]$UserName, 
 
         [parameter(Mandatory = $false)]
-        [securestring]$Password,
-
-        [parameter(Mandatory = $false)]
-        [switch] $NonQuery
+        [securestring]$Password
     )
     
     begin {
@@ -82,15 +85,23 @@ function Invoke-Sql {
                 #Execute as NonQuery            
                 Write-verbose "Creating SQL Command..."
                 $cmd = New-Object system.data.SqlClient.SqlCommand($Query, $conn)
-                Write-Output "Opening SQL Connection..."
+                if ($Parameters.Count -gt 0) {
+                    $cmd.Parameters.Clear()
+                    foreach ($p in $Parameters.Keys) {
+                        [void] $cmd.Parameters.AddWithValue("@$p", $Parameters[$p])
+                    }
+                }
+                Write-Verbose "Opening SQL Connection..."
                 $conn.Open()            
-                Write-output "Executing SQL Command..."
+                Write-Verbose "Executing SQL Command..."
+                Write-Verbose $cmd.CommandText
                 $result = $cmd.ExecuteNonQuery()
-                if($result -gt 0){
-                    Write-Output "Successfully Executed Command"
+                if ($result -gt 0) {
+                    Write-Verbose "Successfully Executed Command"
                     return $result
-                }else{
-                    Write-Error
+                }
+                else {
+                    Write-Error $Error 
                 }
             }
             else {
@@ -102,9 +113,10 @@ function Invoke-Sql {
                         [void] $cmd.Parameters.AddWithValue("@$p", $Parameters[$p])
                     }
                 }
-                Write-Output "Opening SQL Connection..."    
+                Write-Verbose "Opening SQL Connection..."    
                 $conn.Open()
-                $reader = $cmd.ExecuteReader()
+                Write-Verbose $cmd.CommandText
+                $reader = $cmd.ExecuteReader() | Out-Null
                 $results = @()
                 while ($reader.Read()) {
                     $row = @{}
@@ -126,13 +138,13 @@ function Invoke-Sql {
         }
         finally {
             if ($conn.State -eq 'Open') {
-                Write-Output "Closing connection..."
+                Write-Verbose "Closing connection..."
                 $conn.Close()
             }
         }
     }
     
     end {
-        $conn.Dispose()
+        $conn.Dispose()    
     }
 }
