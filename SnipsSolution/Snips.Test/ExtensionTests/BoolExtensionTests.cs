@@ -1,6 +1,6 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SnipsSolution.Extensions;
+using System;
 
 namespace Snips.Test.ExtensionTests
 {

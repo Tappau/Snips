@@ -1,7 +1,7 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SnipsSolution;
 using SnipsSolution.Extensions;
+using System;
 
 namespace Snips.Test.ExtensionTests
 {
@@ -148,7 +148,7 @@ namespace Snips.Test.ExtensionTests
             Assert.AreEqual(expected, testDate.OrdinalSuffix());
         }
 
-        
+
         [TestCase("2019-01-14 11:00:00", "an hour ago")]
         [TestCase("2019-01-14 10:00:00", "2 hours ago")]
         [TestCase("2019-01-14 11:59:59", "one second ago")]

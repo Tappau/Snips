@@ -1,8 +1,8 @@
-﻿using System;
+﻿using NUnit.Framework;
+using SnipsSolution.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
-using SnipsSolution.Extensions;
 
 namespace Snips.Test.ExtensionTests
 {
@@ -10,11 +10,11 @@ namespace Snips.Test.ExtensionTests
     public class HasAtLeastTests
     {
         private static readonly IEnumerable<char> Letters = "abcd";
-        private static readonly IEnumerable<string> Fruits = new[] {"apple", "apricot", "banana"};
+        private static readonly IEnumerable<string> Fruits = new[] { "apple", "apricot", "banana" };
         [Test]
         public static void Throws_ArgumentNullException_When_Sequence_Is_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => ((IEnumerable<object>) null).HasAtLeast(1));
+            Assert.Throws<ArgumentNullException>(() => ((IEnumerable<object>)null).HasAtLeast(1));
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace Snips.Test.ExtensionTests
         public static void Throws_ArgumentNullException_When_Sequence_Is_Null_With_Predicate()
         {
             bool AlwaysTruePredcate(object o) => true;
-            Assert.Throws<ArgumentNullException>(() => ((IEnumerable<object>) null).HasAtLeast(1, AlwaysTruePredcate));
+            Assert.Throws<ArgumentNullException>(() => ((IEnumerable<object>)null).HasAtLeast(1, AlwaysTruePredcate));
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace Snips.Test.ExtensionTests
         [Test]
         public static void Returns_True_When_ActualCount_Is_GreaterThanOrEqual_ToExpected()
         {
-            
+
             Assert.IsTrue(Letters.HasAtLeast(0));
             Assert.IsTrue(Letters.HasAtLeast(2));
             Assert.IsTrue(Letters.HasAtLeast(4));
@@ -72,18 +72,18 @@ namespace Snips.Test.ExtensionTests
         public static void Returns_True_When_ActualCount_IsGreaterThanOrEqual_To_ExpectedMinCount_With_Predicate()
         {
             IEnumerable<string> emptyEnumerable = Enumerable.Empty<string>();
-            Assert.IsTrue(Fruits.HasAtLeast(1, fruit=>fruit.StartsWith("a")));
-            Assert.IsTrue(Fruits.HasAtLeast(2, fruit=>fruit.StartsWith("a")));
-            Assert.IsTrue(Fruits.HasAtLeast(1, fruit=>fruit.StartsWith("b")));
+            Assert.IsTrue(Fruits.HasAtLeast(1, fruit => fruit.StartsWith("a")));
+            Assert.IsTrue(Fruits.HasAtLeast(2, fruit => fruit.StartsWith("a")));
+            Assert.IsTrue(Fruits.HasAtLeast(1, fruit => fruit.StartsWith("b")));
 
-            Assert.IsTrue(emptyEnumerable.HasAtLeast(0, _=>true));
+            Assert.IsTrue(emptyEnumerable.HasAtLeast(0, _ => true));
         }
 
         [Test]
         public static void Returns_False_When_ActualCount_IsLowerThan_ExpectedMinCount_With_Predicate()
         {
-            Assert.IsFalse(Fruits.HasAtLeast(3, f=>f.StartsWith("a")));
-            Assert.IsFalse(Fruits.HasAtLeast(2, f=>f.StartsWith("b")));
+            Assert.IsFalse(Fruits.HasAtLeast(3, f => f.StartsWith("a")));
+            Assert.IsFalse(Fruits.HasAtLeast(2, f => f.StartsWith("b")));
 
         }
     }

@@ -47,7 +47,7 @@ namespace SnipsSolution
             {
                 throw new Exception("Strings must be of equal length");
             }
-            var dist = a.ToCharArray().Zip(b.ToCharArray(), (c1, c2) => new {c1, c2}).Count(mn => mn.c1 != mn.c2);
+            var dist = a.ToCharArray().Zip(b.ToCharArray(), (c1, c2) => new { c1, c2 }).Count(mn => mn.c1 != mn.c2);
             return dist;
         }
 

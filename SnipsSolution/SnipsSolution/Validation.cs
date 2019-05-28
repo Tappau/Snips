@@ -4,7 +4,7 @@ namespace SnipsSolution
 {
     public class Validation
     {
-        public bool CheckPassword (string pass)
+        public bool CheckPassword(string pass)
         {
             //min 6 chars, max 12
             if (pass.Length < 6 || pass.Length > 32)
@@ -33,6 +33,6 @@ namespace SnipsSolution
             return false;
         }
 
-        
+
     }
 }

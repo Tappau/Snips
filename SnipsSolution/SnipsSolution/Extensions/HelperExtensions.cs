@@ -13,7 +13,7 @@ namespace SnipsSolution.Extensions
  */
     public static class HelperExtensions
     {
-        
+
         /// <summary>
         /// Checks if equal to multiple possible values
         /// </summary>
@@ -34,19 +34,23 @@ namespace SnipsSolution.Extensions
         /// <returns>The shuffle.</returns>
         /// <param name="source">Source.</param>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
-        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source){
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
+        {
             if (source == null) throw new ArgumentNullException(nameof(source));
             return ShuffleIterator(source);
         }
 
-        private static IEnumerable<T> ShuffleIterator<T>(this IEnumerable<T> source){
+        private static IEnumerable<T> ShuffleIterator<T>(this IEnumerable<T> source)
+        {
             T[] array = source.ToArray();
             Random rnd = new Random();
-            for (int n = array.Length; n > 1;){
+            for (int n = array.Length; n > 1;)
+            {
                 int k = rnd.Next(n--);
 
                 //do the swapping 
-                if(n != k ){
+                if (n != k)
+                {
                     T tmp = array[k];
                     array[k] = array[n];
                     array[n] = tmp;

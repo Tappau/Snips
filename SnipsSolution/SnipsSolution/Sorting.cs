@@ -24,7 +24,7 @@
         public static void HeapSort(ref int[] data)
         {
             var heapSize = data.Length;
-            for (var p = (heapSize - 1)/2; p >= 0; --p)
+            for (var p = (heapSize - 1) / 2; p >= 0; --p)
                 MaxHeapify(ref data, heapSize, p);
 
             for (var i = data.Length - 1; i > 0; --i)
@@ -40,8 +40,8 @@
 
         private static void MaxHeapify(ref int[] data, int heapSize, int index)
         {
-            var left = (index + 1)*2 - 1;
-            var right = (index + 1)*2;
+            var left = (index + 1) * 2 - 1;
+            var right = (index + 1) * 2;
             int largest;
 
             if (left < heapSize && data[left] > data[index])
@@ -70,7 +70,7 @@
 
         public static int[] ShellSort(int[] array)
         {
-            var gap = array.Length/2;
+            var gap = array.Length / 2;
             while (gap > 0)
             {
                 for (var i = 0; i < array.Length - gap; i++) //modified insertion sort
@@ -90,7 +90,7 @@
                 }
                 else
                 {
-                    gap = (int) (gap/2.2);
+                    gap = (int)(gap / 2.2);
                 }
             }
             return array;

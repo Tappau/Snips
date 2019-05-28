@@ -1,7 +1,7 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SnipsSolution;
 using SnipsSolution.Extensions;
+using System;
 
 namespace Snips.Test
 {
@@ -44,7 +44,7 @@ namespace Snips.Test
             Assert.Throws<ArgumentNullException>(() => testCase.IsUkDateFormat());
         }
 
-       [Test]
+        [Test]
         public static void Return_NewGuid_WhenGuidEmpty()
         {
             var guid = Guid.Empty;

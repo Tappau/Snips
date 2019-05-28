@@ -1,8 +1,8 @@
-﻿using System;
+﻿using NUnit.Framework;
+using SnipsSolution.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
-using SnipsSolution.Extensions;
 
 namespace Snips.Test.ExtensionTests
 {
@@ -12,7 +12,7 @@ namespace Snips.Test.ExtensionTests
         [Test]
         public static void Throws_ArgumentNullException_WhenSequence_Is_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => ((IEnumerable<object>) null).Chunk(2));
+            Assert.Throws<ArgumentNullException>(() => ((IEnumerable<object>)null).Chunk(2));
         }
 
         [TestCase(0)]
@@ -20,7 +20,7 @@ namespace Snips.Test.ExtensionTests
         [TestCase(int.MinValue)]
         public void ThrowsArgumentExceptionWhenChunkSize_Is_ZeroOrNegative(int chunkSize)
         {
-            int[] nums = {1, 2, 3, 4};
+            int[] nums = { 1, 2, 3, 4 };
             Assert.Throws<ArgumentException>(() => nums.Chunk(chunkSize), "Chunk size must be greater than or equal to 1");
         }
 
@@ -37,17 +37,17 @@ namespace Snips.Test.ExtensionTests
         [TestCase(100)]
         public void ReturnSingleChunkifSequenceOnlyHasOneElement(int chunkSize)
         {
-            int[] numbers = {42};
+            int[] numbers = { 42 };
             var chunks = numbers.Chunk(chunkSize).ToArray();
 
-            Assert.AreEqual(1,chunks.Count());
+            Assert.AreEqual(1, chunks.Count());
             Assert.Contains(42, chunks.First());
         }
 
         [Test]
         public static void CorrectlySplitsASequence_Into_SingleElementChunks()
         {
-            int[] numbers = {1, 2, 3, 4, 5, 6, 7};
+            int[] numbers = { 1, 2, 3, 4, 5, 6, 7 };
             int[][] expectedChunks =
             {
                 new[] {1}, new[] {2}, new[] {3}, new[] {4}, new[] {5}, new[] {6}, new[] {7}
@@ -67,7 +67,7 @@ namespace Snips.Test.ExtensionTests
         [Test]
         public void CorrectlySplitsSequence_Into_TwoElementChunks()
         {
-            int[] numbers = {1, 2, 3, 4, 5, 6, 7};
+            int[] numbers = { 1, 2, 3, 4, 5, 6, 7 };
             int[][] expectedChunks =
             {
                 new[] {1, 2}, new[] {3, 4}, new[] {5, 6}, new[] {7}

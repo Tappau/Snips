@@ -92,7 +92,7 @@ namespace SnipsSolution.Extensions
             {
                 try
                 {
-                    return (T) serialiser.Deserialize(reader);
+                    return (T)serialiser.Deserialize(reader);
                 }
                 catch
                 {
@@ -124,7 +124,7 @@ namespace SnipsSolution.Extensions
 
                 i++;
             }
-            
+
             //No matchs
             return -1;
         }
@@ -135,7 +135,7 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static string RemoveLastCharacter(this string val)
         {
-            if(string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
             return val.Substring(0, val.Length - 1);
         }
 
@@ -145,9 +145,9 @@ namespace SnipsSolution.Extensions
         /// <param name="val"></param>
         /// <param name="charsToRemove">Count of characters to remove from end</param>
         /// <returns></returns>
-        public static string RemoveLast(this string val, int charsToRemove =0)
+        public static string RemoveLast(this string val, int charsToRemove = 0)
         {
-            if(string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
             return val.Substring(0, val.Length - charsToRemove);
         }
 
@@ -158,7 +158,7 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static string RemoveFirstCharacter(this string val)
         {
-            if(string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
             return val.Substring(1);
         }
 
@@ -170,7 +170,7 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static string RemoveFirst(this string val, int charsToRemove = 0)
         {
-            if(string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
             return val.Substring(charsToRemove);
         }
 

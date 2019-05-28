@@ -23,7 +23,7 @@
 
             while (lo <= hi)
             {
-                mid = (int) (lo + (double) (hi - lo)/(list[hi] - list[lo])*(dataToFind - list[lo]));
+                mid = (int)(lo + (double)(hi - lo) / (list[hi] - list[lo]) * (dataToFind - list[lo]));
 
                 if (list[mid] == dataToFind)
                 {

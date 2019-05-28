@@ -33,12 +33,12 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static bool IsUkDateFormat(this string value)
         {
-            if(string.IsNullOrWhiteSpace(value)){throw new ArgumentNullException(nameof(value), $"{nameof(value)} cannot be null, whitespace or empty.");}
+            if (string.IsNullOrWhiteSpace(value)) { throw new ArgumentNullException(nameof(value), $"{nameof(value)} cannot be null, whitespace or empty."); }
 
             string[] validFormats = { "dd/MM/yyyy", "dd/MM/yy", "MM/yy", "MM/yyyy", "d/M/yy", "d/M/yyyy", "dd/M/yy", "dd/M/yyyy" };
-            return DateTime.TryParseExact(value,validFormats,CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+            return DateTime.TryParseExact(value, validFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
         }
 
-        
+
     }
 }

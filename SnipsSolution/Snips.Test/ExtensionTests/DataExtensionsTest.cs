@@ -7,7 +7,8 @@ namespace Snips.Test.ExtensionTests
     public class DataExtensionsTest
     {
         [Test]
-        public void ToCSV_Should_Return_Correct_Comma_Seperated_Values(){
+        public void ToCSV_Should_Return_Correct_Comma_Seperated_Values()
+        {
             var values = new[] { 1, 2, 3, 4, 5 };
             var csv = values.ToCsv();
 

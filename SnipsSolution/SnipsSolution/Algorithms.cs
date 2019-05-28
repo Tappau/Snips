@@ -6,7 +6,7 @@ namespace SnipsSolution
     {
         private static void Main(string[] args)
         {
-            int[] a = {30, 20, 50, 40, 10};
+            int[] a = { 30, 20, 50, 40, 10 };
             int x;
             Console.WriteLine("The Array is: ");
             for (var i = 0; i < a.Length; i++)

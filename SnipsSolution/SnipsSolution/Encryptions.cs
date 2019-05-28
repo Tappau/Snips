@@ -23,7 +23,7 @@ namespace SnipsSolution
 
             for (var i = 0; i < dataLen; ++i)
             {
-                output[i] = (char) (data[i] ^ key[i%keyLen]);
+                output[i] = (char)(data[i] ^ key[i % keyLen]);
             }
             return new string(output);
 
@@ -56,7 +56,7 @@ namespace SnipsSolution
 
             for (i = 0; i < toHash.Length; i++)
             {
-                hash = hash*seed + (byte) toHash[(int) i];
+                hash = hash * seed + (byte)toHash[(int)i];
             }
 
             return hash;

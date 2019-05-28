@@ -1,6 +1,6 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SnipsSolution.Extensions;
+using System;
 // ReSharper disable StringLiteralTypo
 
 namespace Snips.Test.ExtensionTests
@@ -33,8 +33,8 @@ namespace Snips.Test.ExtensionTests
         [Test]
         public void ThrowArgumentNullException_OnLeft_And_OnRight()
         {
-            Assert.Throws<ArgumentNullException>(()=>((string) null).Left());
-            Assert.Throws<ArgumentNullException>(() => ((string) null).Right());
+            Assert.Throws<ArgumentNullException>(() => ((string)null).Left());
+            Assert.Throws<ArgumentNullException>(() => ((string)null).Right());
         }
 
         [TestCase("Quick Brown Fox", 7, "Quic...")]
@@ -50,13 +50,13 @@ namespace Snips.Test.ExtensionTests
         {
             var outcome = TestXml.ParseXmlTo<Person>();
             Assert.AreEqual("John Doe", outcome.Name);
-            Assert.AreEqual("31",outcome.Age);
+            Assert.AreEqual("31", outcome.Age);
         }
 
         [Test]
         public void Test_XmlTo_Poco()
         {
-            var person = new Person {Name = "John Doe", Age = "31"};
+            var person = new Person { Name = "John Doe", Age = "31" };
             var outcome = person.ToXml();
             Assert.AreEqual(TestXml, outcome);
         }
@@ -64,7 +64,7 @@ namespace Snips.Test.ExtensionTests
         [TestCase("Lorem ipsum", "m", 2, 10)]
         [TestCase("Quick Brown Fox", "O", 1, -1)]
         [TestCase("Quick Brown Fox", "o", 1, 8)]
-        public void Test_NthIndexOf(string testCase, string indexOf,int nthOccurance, int expected)
+        public void Test_NthIndexOf(string testCase, string indexOf, int nthOccurance, int expected)
         {
             Assert.AreEqual(expected, testCase.NthIndexOf(indexOf, nthOccurance));
         }
@@ -134,7 +134,7 @@ namespace Snips.Test.ExtensionTests
         [TestCase("-2147483648", int.MinValue)]
         public void Test_StringToInt(string testCase, int expected)
         {
-           Assert.AreEqual(expected, testCase.ToInt());
+            Assert.AreEqual(expected, testCase.ToInt());
         }
 
         [TestCase("12.34", 12.34)]

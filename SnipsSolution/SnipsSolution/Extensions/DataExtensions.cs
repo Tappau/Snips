@@ -6,7 +6,7 @@ namespace SnipsSolution.Extensions
 {
     public static class DataExtensions
     {
-       internal static void Each<T>(this IEnumerable<T> enumerable, Action<T> action)
+        internal static void Each<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
             foreach (T item in enumerable)
             {
@@ -20,7 +20,8 @@ namespace SnipsSolution.Extensions
         /// <returns>The csv string</returns>
         /// <param name="instance">List of items</param>
         /// <param name="seperator">Desired seperator</param>
-        public static string ToCsv<T>(this IEnumerable<T> instance, char seperator){
+        public static string ToCsv<T>(this IEnumerable<T> instance, char seperator)
+        {
             if (instance == null) return null;
             var csv = new StringBuilder();
             instance.Each(value => csv.AppendFormat("{0}{1}", value, seperator));
@@ -32,7 +33,8 @@ namespace SnipsSolution.Extensions
         /// </summary>
         /// <returns>The csv string</returns>
         /// <param name="instance">Lst of items</param>
-        public static string ToCsv<T>(this IEnumerable<T> instance){
+        public static string ToCsv<T>(this IEnumerable<T> instance)
+        {
             if (instance == null) return null;
             var csv = new StringBuilder();
             instance.Each(v => csv.AppendFormat("{0},", v));

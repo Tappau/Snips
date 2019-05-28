@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using Newtonsoft.Json;
 
 // ReSharper disable InconsistentNaming
 
@@ -14,7 +14,7 @@ namespace SnipsSolution
         {
             var client = new WebClient();
             var json = client.DownloadString("https://www.gov.uk/bank-holidays.json");
-            var holidays = JsonConvert.DeserializeObject<Dictionary<string,  Holidays>>(json);
+            var holidays = JsonConvert.DeserializeObject<Dictionary<string, Holidays>>(json);
             return holidays["england-and-wales"].events.Select(d => d.date).ToList();
         }
 
@@ -54,9 +54,9 @@ namespace SnipsSolution
                     break;
             }
 
-            date = date.AddDays(numberOfDays/5*7);
-            var extraDays = numberOfDays%5;
-            if ((int) date.DayOfWeek + extraDays > 5)
+            date = date.AddDays(numberOfDays / 5 * 7);
+            var extraDays = numberOfDays % 5;
+            if ((int)date.DayOfWeek + extraDays > 5)
             {
                 extraDays += 2;
             }
@@ -64,7 +64,7 @@ namespace SnipsSolution
             return date.AddDays(extraDays);
         }
 
-        
+
 
 
         public sealed class Holidays

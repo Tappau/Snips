@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SnipsSolution.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Snips.Test
 {
@@ -12,13 +12,13 @@ namespace Snips.Test
         [Test]
         public static void Throws_ArgumentNullException_When_Sequence_Is_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => ((IEnumerable<char>) null).Partition(char.IsUpper));
+            Assert.Throws<ArgumentNullException>(() => ((IEnumerable<char>)null).Partition(char.IsUpper));
         }
 
         [Test]
         public static void Throws_ArgumentNullException_When_Predicate_Is_Null()
         {
-            int[] numbers = {1, 2, 3};
+            int[] numbers = { 1, 2, 3 };
             Assert.Throws<ArgumentNullException>(() => numbers.Partition(null));
         }
 
@@ -32,11 +32,11 @@ namespace Snips.Test
             Assert.IsEmpty(evenAndOddNums.Mismatches);
         }
 
-        [TestCase(new[] {1}, new int[0], new[] {1})]
-        [TestCase(new[] {1, -2}, new[] {-2}, new[] {1})]
-        [TestCase(new[] {0, 0, 0}, new[] {0, 0, 0}, new int[0])]
-        [TestCase(new[] {1, 3, 5}, new int[0], new[] {1, 3, 5})]
-        [TestCase(new[] {1, 2, 3, 4, 5}, new[] {2, 4}, new[] {1, 3, 5})]
+        [TestCase(new[] { 1 }, new int[0], new[] { 1 })]
+        [TestCase(new[] { 1, -2 }, new[] { -2 }, new[] { 1 })]
+        [TestCase(new[] { 0, 0, 0 }, new[] { 0, 0, 0 }, new int[0])]
+        [TestCase(new[] { 1, 3, 5 }, new int[0], new[] { 1, 3, 5 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 2, 4 }, new[] { 1, 3, 5 })]
         public void CorrectlyPartition_GivenSequenceOfNumbersInto_EvenAndOdds(int[] numbers, int[] expectedEvens,
             int[] expectedOdds)
         {

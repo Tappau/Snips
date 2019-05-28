@@ -85,11 +85,11 @@ namespace SnipsSolution.Extensions
                 return $"{ts.Days} days ago";
             if (delta < 31104000) // 12 * 30 * 24 * 60 * 60
             {
-                var months = Convert.ToInt32(Math.Floor((double) ts.Days / 30));
-                return months <= 1 ? "one month ago" :$"{months} months ago";
+                var months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+                return months <= 1 ? "one month ago" : $"{months} months ago";
             }
 
-            var years = Convert.ToInt32(Math.Floor((double) ts.Days / 365));
+            var years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
             return years <= 1 ? "one year ago" : $"{years} years ago";
         }
 
@@ -165,7 +165,7 @@ namespace SnipsSolution.Extensions
 
             switch (day % 10)
             {
-                case 1: 
+                case 1:
                     return $"{day}st";
                 case 2:
                     return $"{day}nd";

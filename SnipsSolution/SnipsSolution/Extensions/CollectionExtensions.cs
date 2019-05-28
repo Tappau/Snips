@@ -39,7 +39,7 @@ namespace SnipsSolution.Extensions
         /// <returns>Cloned collection</returns>
         public static IEnumerable<T> Clone<T>(this IEnumerable<T> value) where T : ICloneable
         {
-            return value.Select(item => (T) item.Clone());
+            return value.Select(item => (T)item.Clone());
         }
 
         #endregion Clone;

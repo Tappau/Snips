@@ -11,15 +11,15 @@ namespace Snips.Test
         {
             var service = new Temperatures();
             Assert.AreEqual(212, service.ToFahrenHeit(100, convertFrom: Temperatures.Measurement.Celsius), "100 C == 212 F");
-            Assert.AreEqual(74.66, service.ToFahrenHeit(23.7, convertFrom: Temperatures.Measurement.Celsius), "23.7 C == 74.66 F" );
-            }
+            Assert.AreEqual(74.66, service.ToFahrenHeit(23.7, convertFrom: Temperatures.Measurement.Celsius), "23.7 C == 74.66 F");
+        }
 
         [Test]
         public void Celsius_To_Kelvin()
         {
             var service = new Temperatures();
             Assert.AreEqual(373.15, service.ToKelvin(100, Temperatures.Measurement.Celsius), "100 C == 373.15 K");
-            Assert.AreEqual(265.15, service.ToKelvin(-8, Temperatures.Measurement.Celsius),"-8 C == 265.15 K");
+            Assert.AreEqual(265.15, service.ToKelvin(-8, Temperatures.Measurement.Celsius), "-8 C == 265.15 K");
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace Snips.Test
         {
             var service = new Temperatures();
             Assert.AreEqual(-173.15, service.ToCelsius(100, Temperatures.Measurement.Kelvin));
-            Assert.AreEqual(404.85,service.ToCelsius(678, Temperatures.Measurement.Kelvin));
+            Assert.AreEqual(404.85, service.ToCelsius(678, Temperatures.Measurement.Kelvin));
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace Snips.Test
         {
             var service = new Temperatures();
             Assert.AreEqual(1120.73, service.ToFahrenHeit(878, Temperatures.Measurement.Kelvin), "878 F == 1120.73 K");
-            Assert.AreEqual(-1874.47, service.ToFahrenHeit(-786, Temperatures.Measurement.Kelvin),"-786 K == -1874.47 F");
+            Assert.AreEqual(-1874.47, service.ToFahrenHeit(-786, Temperatures.Measurement.Kelvin), "-786 K == -1874.47 F");
         }
 
     }

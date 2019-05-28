@@ -116,13 +116,13 @@ namespace SnipsSolution
 
         public static bool IsArmstrongNumber(int number)
         {
-            var digitsCount = (int) Math.Floor(Math.Log10(number)) + 1;
+            var digitsCount = (int)Math.Floor(Math.Log10(number)) + 1;
             var total = 0;
             var tmp = number;
             for (var i = 0; i < digitsCount; i++)
             {
                 var digit = tmp % 10;
-                total += (int) Math.Pow(digit, digitsCount);
+                total += (int)Math.Pow(digit, digitsCount);
                 tmp = tmp / 10;
             }
 
@@ -144,7 +144,7 @@ namespace SnipsSolution
 
             while (i * i <= number)
             {
-//until i <= sqrt(number)
+                //until i <= sqrt(number)
                 if (number % i == 0)
                 {
                     result += i;
@@ -172,12 +172,12 @@ namespace SnipsSolution
             if (d < 0) return null;
             if (Equals(d, 0))
             {
-                double[] result = {-b / 2 * a};
+                double[] result = { -b / 2 * a };
                 return result;
             }
             else
             {
-                double[] result = {(-b + Math.Sqrt(d)) / (2 * a), (-b - Math.Sqrt(d)) / (2 * a)};
+                double[] result = { (-b + Math.Sqrt(d)) / (2 * a), (-b - Math.Sqrt(d)) / (2 * a) };
                 return result;
             }
         }
@@ -202,7 +202,7 @@ namespace SnipsSolution
             if (num % 2 == 0)
                 return num == 2;
 
-            var N = (long) (Math.Sqrt(num) + 0.5);
+            var N = (long)(Math.Sqrt(num) + 0.5);
 
             for (var i = 3; i <= N; i += 2)
                 if (num % i == 0)
@@ -225,7 +225,7 @@ namespace SnipsSolution
             val = Math.Abs(val);
             while (val > 0)
             {
-                var b = (int) (val % 1000);
+                var b = (int)(val % 1000);
                 if (b > 0)
                 {
                     var h = b / 100;
