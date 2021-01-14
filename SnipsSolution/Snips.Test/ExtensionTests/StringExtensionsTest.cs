@@ -14,7 +14,7 @@ namespace Snips.Test.ExtensionTests
     [TestFixture]
     public class StringExtensionsTest
     {
-        private const string TestXml = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Person xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <Name>John Doe</Name>\r\n  <Age>31</Age>\r\n</Person>";
+        private const string TestXml = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Person>\r\n  <Name>John Doe</Name>\r\n  <Age>31</Age>\r\n</Person>";
 
         [TestCase("Quick Brown Fox", 4, " Fox")]
         [TestCase("Lorem ipsum dolor", 7, "m dolor")]

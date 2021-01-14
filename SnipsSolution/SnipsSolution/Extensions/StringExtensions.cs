@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SnipsSolution.Extensions
@@ -89,7 +90,7 @@ namespace SnipsSolution.Extensions
             var serialiser = new XmlSerializer(typeof(T));
             using (var writer = new StringWriter())
             {
-                serialiser.Serialize(writer, obj);
+                serialiser.Serialize(writer, obj, new XmlSerializerNamespaces(new[] {new XmlQualifiedName("", "")}));
                 return writer.ToString();
             }
         }

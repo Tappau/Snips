@@ -2,7 +2,7 @@ language: csharp
 mono: none
 dotnet: 5.0
 install:
-- dotnet restore
+- dotnet restore ./SnipsSolution/SnipsSolution.sln
 #   - nuget restore ./SnipsSolution/SnipsSolution.sln
 #   - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
