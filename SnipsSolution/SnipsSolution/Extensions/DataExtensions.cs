@@ -22,7 +22,11 @@ namespace SnipsSolution.Extensions
         /// <param name="seperator">Desired seperator</param>
         public static string ToCsv<T>(this IEnumerable<T> instance, char seperator)
         {
-            if (instance == null) return null;
+            if (instance == null)
+            {
+                return null;
+            }
+
             var csv = new StringBuilder();
             instance.Each(value => csv.AppendFormat("{0}{1}", value, seperator));
             return csv.ToString(0, csv.Length - 1);
@@ -35,7 +39,11 @@ namespace SnipsSolution.Extensions
         /// <param name="instance">Lst of items</param>
         public static string ToCsv<T>(this IEnumerable<T> instance)
         {
-            if (instance == null) return null;
+            if (instance == null)
+            {
+                return null;
+            }
+
             var csv = new StringBuilder();
             instance.Each(v => csv.AppendFormat("{0},", v));
             return csv.ToString(0, csv.Length - 1);

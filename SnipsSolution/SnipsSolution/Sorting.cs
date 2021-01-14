@@ -25,7 +25,9 @@
         {
             var heapSize = data.Length;
             for (var p = (heapSize - 1) / 2; p >= 0; --p)
+            {
                 MaxHeapify(ref data, heapSize, p);
+            }
 
             for (var i = data.Length - 1; i > 0; --i)
             {

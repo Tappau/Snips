@@ -14,7 +14,10 @@ namespace SnipsSolution.Extensions
         /// <param name="length">Max number of of characters to return</param>
         public static string Right(this string value, int length = 0)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             return length != 0 && value.Length > length ? value.Substring(value.Length - length) : value;
         }
@@ -27,7 +30,11 @@ namespace SnipsSolution.Extensions
         /// <param name="length">Max number of characters to return</param>
         public static string Left(this string value, int length = 0)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
             return length != 0 && value.Length > length ? value.Substring(0, length) : value;
         }
 
@@ -43,12 +50,22 @@ namespace SnipsSolution.Extensions
             const string suffix = "...";
             string truncatedString = text;
 
-            if (maxlength <= 0) return truncatedString;
+            if (maxlength <= 0)
+            {
+                return truncatedString;
+            }
+
             int stringLength = maxlength - suffix.Length;
 
-            if (stringLength <= 0) return truncatedString;
+            if (stringLength <= 0)
+            {
+                return truncatedString;
+            }
 
-            if (text == null || text.Length <= maxlength) return truncatedString;
+            if (text == null || text.Length <= maxlength)
+            {
+                return truncatedString;
+            }
 
             truncatedString = text.Substring(0, stringLength);
             truncatedString = truncatedString.TrimEnd();
@@ -64,7 +81,10 @@ namespace SnipsSolution.Extensions
         /// <typeparam name="T">Any object type.</typeparam>
         public static string ToXml<T>(this T obj) where T : class, new()
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            if (obj == null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
 
             var serialiser = new XmlSerializer(typeof(T));
             using (var writer = new StringWriter())
@@ -135,7 +155,11 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static string RemoveLastCharacter(this string val)
         {
-            if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            if (string.IsNullOrWhiteSpace(val))
+            {
+                throw new ArgumentNullException(nameof(val));
+            }
+
             return val.Substring(0, val.Length - 1);
         }
 
@@ -147,7 +171,11 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static string RemoveLast(this string val, int charsToRemove = 0)
         {
-            if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            if (string.IsNullOrWhiteSpace(val))
+            {
+                throw new ArgumentNullException(nameof(val));
+            }
+
             return val.Substring(0, val.Length - charsToRemove);
         }
 
@@ -158,7 +186,11 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static string RemoveFirstCharacter(this string val)
         {
-            if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            if (string.IsNullOrWhiteSpace(val))
+            {
+                throw new ArgumentNullException(nameof(val));
+            }
+
             return val.Substring(1);
         }
 
@@ -170,7 +202,11 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static string RemoveFirst(this string val, int charsToRemove = 0)
         {
-            if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException(nameof(val));
+            if (string.IsNullOrWhiteSpace(val))
+            {
+                throw new ArgumentNullException(nameof(val));
+            }
+
             return val.Substring(charsToRemove);
         }
 

@@ -23,7 +23,6 @@ namespace SnipsSolution
             return (5.0 / 9.0) * (fahrenheit - 32);
         }
 
-
         public double ToKelvin(double num, Measurement convertFrom)
         {
             double result = 0.0;

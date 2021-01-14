@@ -14,11 +14,19 @@ namespace SnipsSolution.Extensions
         /// <returns>An existing key; or <see cref="string.Empty" /> if not found.</returns>
         public static string GetKeyIgnoringCase<T>(this IDictionary<string, T> dictionary, string insensitiveKeySearch)
         {
-            if (string.IsNullOrWhiteSpace(insensitiveKeySearch)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(insensitiveKeySearch))
+            {
+                return string.Empty;
+            }
 
             foreach (var key in dictionary.Keys)
+            {
                 if (key.Equals(insensitiveKeySearch, StringComparison.InvariantCultureIgnoreCase))
+                {
                     return key;
+                }
+            }
+
             return string.Empty;
         }
 
@@ -31,8 +39,12 @@ namespace SnipsSolution.Extensions
         {
             var dictionary = new Dictionary<string, object>();
             foreach (var propertyInfo in obj.GetType().GetProperties())
+            {
                 if (propertyInfo.GetIndexParameters().Length == 0)
+                {
                     dictionary.Add(propertyInfo.Name, propertyInfo.GetValue(obj, null));
+                }
+            }
 
             return dictionary;
         }

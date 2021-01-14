@@ -27,7 +27,9 @@ namespace SnipsSolution
             {
                 if (date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday
                     && !holidays.Contains(date))
+                {
                     totalDays++;
+                }
             }
             return totalDays;
         }
@@ -40,7 +42,10 @@ namespace SnipsSolution
                 throw new ArgumentException("Day's cannot be negative", nameof(numberOfDays));
             }
 
-            if (numberOfDays == 0) return date;
+            if (numberOfDays == 0)
+            {
+                return date;
+            }
 
             switch (date.DayOfWeek)
             {

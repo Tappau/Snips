@@ -8,9 +8,9 @@ namespace SnipsSolution.Extensions
 {
     public static class RomanNumeralExtensions
     {
-        internal const int NumberOfRomanNumeralMaps = 13;
+        private const int NumberOfRomanNumeralMaps = 13;
 
-        internal static readonly Dictionary<string, int> RomanNumerals =
+        private static readonly Dictionary<string, int> RomanNumerals =
             new Dictionary<string, int>(NumberOfRomanNumeralMaps)
             {
                 {"M", 1000},
@@ -28,7 +28,7 @@ namespace SnipsSolution.Extensions
                 {"I", 1}
             };
 
-        internal static readonly Regex ValidRomanNumeral = new Regex(
+        private static readonly Regex ValidRomanNumeral = new Regex(
             "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))"
             + "?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
             RegexOptions.Compiled);
@@ -50,14 +50,19 @@ namespace SnipsSolution.Extensions
         /// <param name="value">String to parse.</param>
         public static int ParseRomanNumeral(this string value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             value = value.ToUpperInvariant().Trim();
 
             var length = value.Length;
 
             if (length == 0 || !value.IsValidRomanNumeral())
+            {
                 throw new ArgumentException("Empty or invalid Roman numeral string.", nameof(value));
+            }
 
             var total = 0;
             var i = length;
@@ -95,16 +100,20 @@ namespace SnipsSolution.Extensions
             const int maxRomanNumeralLength = 15;
 
             if (value < minValue || value > maxValue)
+            {
                 throw new ArgumentOutOfRangeException(nameof(value), value, "Argument out of Roman numeral range.");
+            }
 
             var sb = new StringBuilder(maxRomanNumeralLength);
 
             foreach (var pair in RomanNumerals)
+            {
                 while (value / pair.Value > 0)
                 {
                     sb.Append(pair.Key);
                     value -= pair.Value;
                 }
+            }
 
             return sb.ToString();
         }

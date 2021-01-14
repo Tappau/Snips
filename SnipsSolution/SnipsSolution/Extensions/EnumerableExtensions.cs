@@ -19,9 +19,16 @@ namespace SnipsSolution.Extensions
         /// <returns>The chunked sequence.</returns>
         public static IEnumerable<TSource[]> Chunk<TSource>(this IEnumerable<TSource> source, int chunkSize)
         {
-            if (source.IsNull()) throw new ArgumentNullException(nameof(source));
+            if (source.IsNull())
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
             if (chunkSize <= 0)
+            {
                 throw new ArgumentException(nameof(chunkSize), string.Concat(nameof(chunkSize), "must be positive."));
+            }
+
             return ChunkIterator(source, chunkSize);
         }
 
@@ -95,11 +102,17 @@ namespace SnipsSolution.Extensions
             ThrowIf.Argument.IsNull(predicate, nameof(predicate));
             ThrowIf.Argument.IsNegative(minElementCount, nameof(minElementCount));
 
-            if (minElementCount == 0) return true;
+            if (minElementCount == 0)
+            {
+                return true;
+            }
 
             var sourceCollection = source as ICollection;
 
-            if (sourceCollection != null && sourceCollection.Count < minElementCount) return false;
+            if (sourceCollection != null && sourceCollection.Count < minElementCount)
+            {
+                return false;
+            }
 
             var matches = 0;
 
@@ -107,7 +120,10 @@ namespace SnipsSolution.Extensions
             {
                 matches++;
 
-                if (matches >= minElementCount) return true;
+                if (matches >= minElementCount)
+                {
+                    return true;
+                }
             }
 
             return false;
@@ -135,10 +151,16 @@ namespace SnipsSolution.Extensions
             var mismatches = new List<TSource>();
 
             foreach (var value in source)
+            {
                 if (predicate(value))
+                {
                     matches.Add(value);
+                }
                 else
+                {
                     mismatches.Add(value);
+                }
+            }
 
             return new PartitionedSequence<TSource>(matches, mismatches);
         }

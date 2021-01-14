@@ -1,8 +1,12 @@
 language: csharp
 solution: ./SnipsSolution/SnipsSolution.sln
-# install:
+dotnet: 5.0.2
+install:
+  - dotnet restore
 #   - nuget restore ./SnipsSolution/SnipsSolution.sln
 #   - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
-# script:
+script:
+  - dotnet build
+  - dotnet test SnipsSolution/Snips.Test/Snips.Test.csproj
 #   - msbuild /p:Configuration=Release ./SnipsSolution/SnipsSolution.sln
 #   - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./SnipsSolution/Snips.Test/bin/Release/Snips.Test.dll
