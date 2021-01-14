@@ -1,6 +1,6 @@
 language: csharp
 mono: none
-dotnet: 5.0.2
+dotnet: 5.0
 install:
 - dotnet restore
 #   - nuget restore ./SnipsSolution/SnipsSolution.sln
