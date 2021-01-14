@@ -19,9 +19,14 @@ namespace SnipsSolution
             while (num1 != num2)
             {
                 if (num1 > num2)
+                {
                     num1 = num1 - num2;
+                }
+
                 if (num2 > num1)
+                {
                     num2 = num2 - num1;
+                }
             }
 
             return num1;
@@ -47,14 +52,25 @@ namespace SnipsSolution
         {
             var result = "";
             for (var i = 1; i < 101; i++)
+            {
                 if (i % 3 == 0 && i % 5 == 0)
+                {
                     result += "FizzBuzz" + Environment.NewLine;
+                }
                 else if (i % 3 == 0)
+                {
                     result += "Fizz" + Environment.NewLine;
+                }
                 else if (i % 5 == 0)
+                {
                     result += "Buzz" + Environment.NewLine;
+                }
                 else
+                {
                     result += i + Environment.NewLine;
+                }
+            }
+
             return result;
         }
 
@@ -105,11 +121,13 @@ namespace SnipsSolution
 
             int mostCommonNumber = 0, occurrences = 0;
             foreach (var pair in counts)
+            {
                 if (pair.Value > occurrences)
                 {
                     occurrences = pair.Value;
                     mostCommonNumber = pair.Key;
                 }
+            }
 
             Console.WriteLine("The Most common number is {0} and it appears {1} times.", mostCommonNumber, occurrences);
         }
@@ -138,7 +156,11 @@ namespace SnipsSolution
         {
             //odd Perfects number do not exist so check its even
 
-            if (number % 2 == 1) return false;
+            if (number % 2 == 1)
+            {
+                return false;
+            }
+
             long result = 1;
             long i = 2;
 
@@ -154,7 +176,11 @@ namespace SnipsSolution
                 i++;
             }
 
-            if (i * i == number) result -= i;
+            if (i * i == number)
+            {
+                result -= i;
+            }
+
             return result == number;
         }
 
@@ -169,7 +195,11 @@ namespace SnipsSolution
         public static double[] SolveQuadraticEquation(double a, double b, double c)
         {
             var d = b * b - 4 * a * c; //discriminant
-            if (d < 0) return null;
+            if (d < 0)
+            {
+                return null;
+            }
+
             if (Equals(d, 0))
             {
                 double[] result = { -b / 2 * a };
@@ -198,23 +228,40 @@ namespace SnipsSolution
         public bool IsPrimeNumber(long num)
         {
             if (num <= 1)
+            {
                 return false;
+            }
+
             if (num % 2 == 0)
+            {
                 return num == 2;
+            }
 
             var N = (long)(Math.Sqrt(num) + 0.5);
 
             for (var i = 3; i <= N; i += 2)
+            {
                 if (num % i == 0)
+                {
                     return false;
+                }
+            }
+
             return true;
         }
 
         public static string WordifyNumber(decimal val)
         {
             //Humanizer nuget does this and whole lot more
-            if (val == 0) return "zero";
-            if (val < 0) return "- " + WordifyNumber(val);
+            if (val == 0)
+            {
+                return "zero";
+            }
+
+            if (val < 0)
+            {
+                return "- " + WordifyNumber(val);
+            }
 
             var units = "|One|Two|Three|Four|Five|Six|Seven|Eight|Nine".Split('|');
             var teens = "|eleven|twelve|thir#|four#|fif#|six#|seven#|eigh#|nine#".Replace("#", "teen").Split('|');

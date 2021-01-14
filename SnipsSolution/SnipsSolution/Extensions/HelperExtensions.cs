@@ -23,7 +23,11 @@ namespace SnipsSolution.Extensions
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         public static bool IsAnyOf<T>(this T source, params T[] list)
         {
-            if (null == source) throw new ArgumentNullException(nameof(source));
+            if (null == source)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
             return list.Contains(source);
         }
 
@@ -36,7 +40,11 @@ namespace SnipsSolution.Extensions
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
             return ShuffleIterator(source);
         }
 
@@ -57,7 +65,10 @@ namespace SnipsSolution.Extensions
                 }
             }
 
-            foreach (var item in array) yield return item;
+            foreach (var item in array)
+            {
+                yield return item;
+            }
         }
 
     }

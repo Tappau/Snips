@@ -8,7 +8,10 @@
 
             for (var i = 0; i < list.Length; i++)
             {
-                if (data == list[i]) return i;
+                if (data == list[i])
+                {
+                    return i;
+                }
             }
             return -1;
         }
@@ -31,9 +34,13 @@
                     break;
                 }
                 if (list[mid] < dataToFind)
+                {
                     lo = mid + 1;
+                }
                 else
+                {
                     hi = mid - 1;
+                }
             }
             return index;
         }

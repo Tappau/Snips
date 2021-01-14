@@ -17,12 +17,14 @@ namespace SnipsSolution
                 {
                     return true;
                 }
+
                 var a = wordToTest[min];
                 var b = wordToTest[max];
                 if (char.ToUpper(a) != char.ToUpper(b))
                 {
                     return false;
                 }
+
                 min++;
                 max--;
 
@@ -47,7 +49,8 @@ namespace SnipsSolution
             {
                 throw new Exception("Strings must be of equal length");
             }
-            var dist = a.ToCharArray().Zip(b.ToCharArray(), (c1, c2) => new { c1, c2 }).Count(mn => mn.c1 != mn.c2);
+
+            var dist = a.ToCharArray().Zip(b.ToCharArray(), (c1, c2) => new {c1, c2}).Count(mn => mn.c1 != mn.c2);
             return dist;
         }
 
@@ -67,6 +70,7 @@ namespace SnipsSolution
             {
                 return m;
             }
+
             if (m == 0)
             {
                 return n;
@@ -96,6 +100,7 @@ namespace SnipsSolution
                         d[i - 1, j - 1] + cost);
                 }
             }
+
             // Step 7
             return d[n, m];
         }
@@ -113,10 +118,15 @@ namespace SnipsSolution
                 }
                 else
                 {
-                    if (!inWord) count++;
+                    if (!inWord)
+                    {
+                        count++;
+                    }
+
                     inWord = true;
                 }
             }
+
             return count;
         }
 
@@ -155,10 +165,11 @@ namespace SnipsSolution
                     Reverse(str, start, i);
                 }
             }
+
             Reverse(str, 0, n - 1);
         }
 
-        internal static void Reverse(char[] str, int start, int end)
+        private static void Reverse(char[] str, int start, int end)
         {
             while (start < end)
             {
@@ -168,7 +179,7 @@ namespace SnipsSolution
             }
         }
 
-        internal static void Swap(char[] str, int start, int end)
+        private static void Swap(char[] str, int start, int end)
         {
             var tmp = str[start];
             str[start] = str[end];
@@ -182,7 +193,11 @@ namespace SnipsSolution
             {
                 if (s[i] == s[currentIdx])
                 {
-                    if (bestScore >= i - currentIdx) continue;
+                    if (bestScore >= i - currentIdx)
+                    {
+                        continue;
+                    }
+
                     bestIdx = currentIdx;
                     bestScore = i - currentIdx;
                 }
@@ -191,15 +206,23 @@ namespace SnipsSolution
                     currentIdx = i;
                 }
             }
+
             return bestIdx;
         }
 
-        internal static bool IsAnagram(string a, string b)
+        private static bool IsAnagram(string a, string b)
         {
             //ANAGRAMS must be same length
             //Validate the strings are not empty or not same length
-            if (string.IsNullOrWhiteSpace(a) || string.IsNullOrWhiteSpace(b)) return false;
-            if (a.Length != b.Length) return false;
+            if (string.IsNullOrWhiteSpace(a) || string.IsNullOrWhiteSpace(b))
+            {
+                return false;
+            }
+
+            if (a.Length != b.Length)
+            {
+                return false;
+            }
 
             var letters = new int[256];
             var aArray = a.ToCharArray();
@@ -207,6 +230,7 @@ namespace SnipsSolution
             {
                 letters[c]++;
             }
+
             foreach (var c in b)
             {
                 if (--letters[c] < 0)
@@ -214,6 +238,7 @@ namespace SnipsSolution
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -221,11 +246,9 @@ namespace SnipsSolution
         {
             var arrayOfWords = s.Split('\n', '\r', ' ');
             return GetAnagrams(arrayOfWords);
-
         }
 
-
-        public static string GetAnagrams(string[] wordsArray)
+        private static string GetAnagrams(string[] wordsArray)
         {
             var result = "";
 
@@ -239,8 +262,8 @@ namespace SnipsSolution
                     }
                 }
             }
+
             return result;
         }
-
     }
 }

@@ -19,7 +19,9 @@ namespace SnipsSolution.Extensions
             var val = value.ToLower();
 
             if (!val.IsAnyOf(ValidList))
+            {
                 throw new ArgumentException("Must be an accepted string representation of boolean", nameof(value));
+            }
 
             switch (val.ToLower())
             {
