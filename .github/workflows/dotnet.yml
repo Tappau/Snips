@@ -28,4 +28,4 @@ jobs:
             --configuration ${{ env.BuildConfig }}                       
           
     - name: Test
-      run: dotnet test ${{ env.SolutionFile }} --no-build --verbosity normal
+      run: dotnet test ${{ env.SolutionFile }} --no-build --configuration ${{ env.BuildConfig }} --verbosity normal 
