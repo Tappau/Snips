@@ -8,7 +8,7 @@ on:
 
 env:
   BuildConfig:  Release
-  SolutionFile: ./SnipsSolution/SnipsSolution.sln
+  SolutionFile: SnipsSolution/SnipsSolution.sln
 jobs:
   build:
 
@@ -24,7 +24,8 @@ jobs:
       run: dotnet restore ${{ env.SolutionFile }}
     - name: Build
       run: dotnet build ${{ env.SolutionFile }}
-            --configuration ${{ env.BuildConfig }}                       
+            --configuration ${{ env.BuildConfig }} 
+            --no-restore                       
           
     - name: Test
       run: dotnet test ${{ env.SolutionFile }} --no-build --verbosity normal
