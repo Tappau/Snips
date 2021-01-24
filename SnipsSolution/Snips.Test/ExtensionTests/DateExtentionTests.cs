@@ -45,6 +45,7 @@ namespace Snips.Test.ExtensionTests
 
         [TestCase("15/06/1962", 56)]
         [TestCase("30/11/1989", 29)]
+        [SetCulture("en-GB")]
         public void Test_CalculateAge_ToCurrentDate(string testDate, int expectedResult)
         {
             using (Clock.NowIs(new DateTime(2019, 01, 01)))
@@ -90,7 +91,7 @@ namespace Snips.Test.ExtensionTests
         }
 
         [Test]
-        //[SetCulture("en-GB")]
+        [SetCulture("en-GB")]
         public void Return_False_BetweenDates()
         {
             var pastDate = DateTime.Parse("15/06/2008 12:45:23");
@@ -100,7 +101,7 @@ namespace Snips.Test.ExtensionTests
         }
 
         [Test]
-        //[SetCulture("en-GB")]
+        [SetCulture("en-GB")]
         public void Return_False_DateTime_Is_InPast()
         {
             var futureDate = DateTime.Parse("15/06/2056 12:24:48");
