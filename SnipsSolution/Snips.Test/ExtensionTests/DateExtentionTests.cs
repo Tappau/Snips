@@ -90,6 +90,7 @@ namespace Snips.Test.ExtensionTests
         }
 
         [Test]
+        //[SetCulture("en-GB")]
         public void Return_False_BetweenDates()
         {
             var pastDate = DateTime.Parse("15/06/2008 12:45:23");
@@ -99,6 +100,7 @@ namespace Snips.Test.ExtensionTests
         }
 
         [Test]
+        //[SetCulture("en-GB")]
         public void Return_False_DateTime_Is_InPast()
         {
             var futureDate = DateTime.Parse("15/06/2056 12:24:48");
@@ -106,6 +108,7 @@ namespace Snips.Test.ExtensionTests
         }
 
         [Test]
+        [SetCulture("en-GB")]
         public void Return_False_IsDateInFuture_From_CurrentTime()
         {
             var futureDate = DateTime.Parse("15/06/1998 15:07:32");
@@ -113,6 +116,7 @@ namespace Snips.Test.ExtensionTests
         }
 
         [Test]
+        [SetCulture("en-GB")]
         public void Return_True_BetweenDates()
         {
             var pastDate = DateTime.Parse("15/06/2008 12:45:23");
@@ -122,6 +126,7 @@ namespace Snips.Test.ExtensionTests
         }
 
         [Test]
+        [SetCulture("en-GB")]
         public void Return_True_DateTime_Is_InPast()
         {
             var pastDate = DateTime.Parse("15/06/1998 12:24:48");
@@ -129,6 +134,7 @@ namespace Snips.Test.ExtensionTests
         }
 
         [Test]
+        [SetCulture("en-GB")]
         public void Returns_True_IsDateInFuture_From_CurrentTime()
         {
             var futureDate = DateTime.Parse("15/05/2056 15:26:43");
