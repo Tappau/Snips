@@ -14,7 +14,12 @@ namespace Snips.Test.ExtensionTests
     [TestFixture]
     public class StringExtensionsTest
     {
-        private const string TestXml = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Person>\r\n  <Name>John Doe</Name>\r\n  <Age>31</Age>\r\n</Person>";
+        private string TestXml = string.Empty;
+
+        public StringExtensionsTest()
+        {
+            TestXml = string.Format("<?xml version=\"1.0\" encoding=\"utf-16\"?>{0}<Person>{0}  <Name>John Doe</Name>{0}  <Age>31</Age>{0}</Person>", Environment.NewLine);
+        }
 
         [TestCase("Quick Brown Fox", 4, " Fox")]
         [TestCase("Lorem ipsum dolor", 7, "m dolor")]
