@@ -156,12 +156,7 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static string RemoveLastCharacter(this string val)
         {
-            if (string.IsNullOrWhiteSpace(val))
-            {
-                throw new ArgumentNullException(nameof(val));
-            }
-
-            return val.Substring(0, val.Length - 1);
+            return val.RemoveLast(1);
         }
 
         /// <summary>
@@ -187,12 +182,7 @@ namespace SnipsSolution.Extensions
         /// <returns></returns>
         public static string RemoveFirstCharacter(this string val)
         {
-            if (string.IsNullOrWhiteSpace(val))
-            {
-                throw new ArgumentNullException(nameof(val));
-            }
-
-            return val.Substring(1);
+            return val.RemoveFirst(1);
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace SnipsSolution
 {
@@ -6,6 +8,7 @@ namespace SnipsSolution
     {
         public enum Measurement
         {
+            [Description("de")]
             Fahrenheit,
             Celsius,
             Kelvin

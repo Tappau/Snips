@@ -48,5 +48,47 @@ namespace SnipsSolution.Extensions
 
             return dictionary;
         }
+
+        /// <summary>
+        /// Get specified keys from a dictionary.
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <param name="keyValuesToSelect"></param>
+        /// <returns>Returns a new dictionary containing the matching entries from original dictionary.</returns>
+        public static IDictionary<string, string> SelectKeys(this IDictionary<string, string> dictionary
+          , params string[] keyValuesToSelect)
+        {
+            var newResult = new Dictionary<string, string>();
+            foreach (var key in keyValuesToSelect)
+            {
+                if (dictionary.TryGetValue(key, out var valueToAdd))
+                {
+                    newResult[key] = valueToAdd;
+                }
+            }
+
+            return newResult;
+        }
+
+        /// <summary>
+        /// Adds a value if not existing already otherwise safely updates.
+        /// </summary>
+        /// <typeparam name="TKey">Key for the dictionary to update or add</typeparam>
+        /// <typeparam name="TValue">Value to inserted or updated for the key provided.</typeparam>
+        /// <param name="dictionary"></param>
+        /// <param name="key"></param>
+        /// <param name="newValue"></param>
+        public static void AddOrUpdateValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key
+          , TValue newValue)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                dictionary[key] = newValue;
+            }
+            else
+            {
+                dictionary.Add(key, newValue);
+            }
+        }
     }
 }
