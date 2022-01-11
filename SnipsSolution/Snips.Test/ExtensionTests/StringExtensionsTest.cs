@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using SnipsSolution.Extensions;
 using System;
+using System.Runtime.CompilerServices;
+
 // ReSharper disable StringLiteralTypo
 
 namespace Snips.Test.ExtensionTests
@@ -148,6 +150,39 @@ namespace Snips.Test.ExtensionTests
         public void Test_StringToDouble(string testCase, double expected)
         {
             Assert.AreEqual(expected, testCase.ToDouble());
+        }
+
+        [TestCase("TestCaseOne", "test", "CaseOne")]
+        [TestCase("Tappau", "TAP", "pau")]
+        public void TrimStart_CaseInsensitive_Returns_AsExpected(string testCase, string removeFromStart, string expected)
+        {
+            Assert.AreEqual(expected, testCase.TrimStart(removeFromStart, false));
+        }
+
+        [TestCase("TestCaseOne", "test", "TestCaseOne")]
+        [TestCase("Tappau", "TAP", "Tappau")]
+        public void TrimStart_CaseSensitive_Returns_AsExpected(string testCase, string removeFromStart, string expected)
+        {
+            Assert.AreEqual(expected, testCase.TrimStart(removeFromStart, true));
+        }
+
+        [TestCase("This is camel case", "ThisIsCamelCase")]
+        [TestCase(null, "")]
+        [TestCase("Lorem ipsum \n   Bacon", "LoremIpsumBacon")]
+        [TestCase("lorem ipsum", "LoremIpsum")]
+        public void ToCamelCase_ReturnsAsExpected(string testCase, string expected)
+        {
+            Assert.AreEqual(expected, testCase.ToCamelCase());
+        }
+
+        [TestCase("lorem ipsum", " ---", "lorem ipsum ---")]
+        [TestCase("Lorem ipsum \n   Bacon","2021-12-25", "Lorem ipsum \n   Bacon2021-12-25")]
+        [TestCase("Tappau","pau", "Tappau")]
+        [TestCase(null, "---" ,null)]
+        [TestCase("", "---" ,"")]
+        public void TerminateWith_ReturnsAsExpected(string testCase, string terminateWith ,string expected)
+        {
+            Assert.AreEqual(expected, testCase.TerminateWith(terminateWith));
         }
     }
 }

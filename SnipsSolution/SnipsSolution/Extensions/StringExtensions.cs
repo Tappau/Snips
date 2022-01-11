@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -229,6 +231,81 @@ namespace SnipsSolution.Extensions
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Trims a substring from the start of a string.
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="textToTrim">The string to remove from start</param>
+        /// <param name="caseSensitive">If it should be case sensitive or not</param>
+        /// <returns></returns>
+        public static string TrimStart(this string val, string textToTrim, bool caseSensitive)
+        {
+            while (true)
+            {
+                var match = val[..textToTrim.Length];
+
+                if (match==textToTrim || (!caseSensitive && match.ToLower()==textToTrim.ToLower()))
+                {
+                    val = val.Length < match.Length ? string.Empty : val.Substring(textToTrim.Length);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return val;
+        }
+
+        /// <summary>
+        /// Takes a string and turns it into CamelCase text.
+        /// All whitespace, punctuation and seperators are stripped.
+        /// </summary>
+        /// <param name="val">Text to convert</param>
+        public static string ToCamelCase(this string val)
+        {
+            if (val == null)
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder(val.Length);
+
+            //First letter is always uppercase
+            var nextUpper = true;
+
+            foreach (var ch in val)
+            {
+                if (char.IsWhiteSpace(ch) || char.IsPunctuation(ch) || char.IsSeparator(ch))
+                {
+                    nextUpper = true;
+                    continue;
+                }
+
+                sb.Append(nextUpper ? char.ToUpper(ch) : char.ToLower(ch));
+
+                nextUpper = false;
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Terminates a string with the input value, only if the value specified doesn't already exist and the string is not empty.
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="terminator"></param>
+        /// <returns></returns>
+        public static string TerminateWith(this string val, string terminator)
+        {
+            if (string.IsNullOrEmpty(val) || val.EndsWith(terminator))
+            {
+                return val;
+            }
+
+            return val + terminator;
         }
     }
 }
