@@ -307,5 +307,10 @@ namespace SnipsSolution.Extensions
 
             return val + terminator;
         }
+
+        public static string Replicate(this string input, int replicateTimes)
+        {
+            return new StringBuilder().Insert(0, input, replicateTimes).ToString();
+        }
     }
 }

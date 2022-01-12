@@ -184,5 +184,12 @@ namespace Snips.Test.ExtensionTests
         {
             Assert.AreEqual(expected, testCase.TerminateWith(terminateWith));
         }
+
+        [TestCase("lorem", 4, "loremloremloremlorem")]
+        [TestCase("tappau", 2, "tappautappau")]
+        public void Replicate(string character, int replicationTimes, string expectedResponse)
+        {
+            Assert.AreEqual(expectedResponse, character.Replicate(replicationTimes));
+        }
     }
 }
