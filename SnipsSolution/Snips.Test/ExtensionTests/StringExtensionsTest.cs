@@ -16,11 +16,11 @@ namespace Snips.Test.ExtensionTests
     [TestFixture]
     public class StringExtensionsTest
     {
-        private string TestXml = string.Empty;
+        private readonly string _testXml;
 
         public StringExtensionsTest()
         {
-            TestXml = string.Format("<?xml version=\"1.0\" encoding=\"utf-16\"?>{0}<Person>{0}  <Name>John Doe</Name>{0}  <Age>31</Age>{0}</Person>", Environment.NewLine);
+            _testXml = string.Format("<?xml version=\"1.0\" encoding=\"utf-16\"?>{0}<Person>{0}  <Name>John Doe</Name>{0}  <Age>31</Age>{0}</Person>", Environment.NewLine);
         }
 
         [TestCase("Quick Brown Fox", 4, " Fox")]
@@ -55,7 +55,7 @@ namespace Snips.Test.ExtensionTests
         [Test]
         public void Test_ParseXmlTo_Poco()
         {
-            var outcome = TestXml.ParseXmlTo<Person>();
+            var outcome = _testXml.ParseXmlTo<Person>();
             Assert.AreEqual("John Doe", outcome.Name);
             Assert.AreEqual("31", outcome.Age);
         }
@@ -65,7 +65,7 @@ namespace Snips.Test.ExtensionTests
         {
             var person = new Person { Name = "John Doe", Age = "31" };
             var outcome = person.ToXml();
-            Assert.AreEqual(TestXml, outcome);
+            Assert.AreEqual(_testXml, outcome);
         }
 
         [TestCase("Lorem ipsum", "m", 2, 10)]
