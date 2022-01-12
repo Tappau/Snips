@@ -178,5 +178,34 @@ namespace SnipsSolution.Extensions
         }
 
         #endregion
+
+        #region NonConsecutive
+
+        public static IEnumerable<T> ConsecutiveDistinct<T>(this IEnumerable<T> input)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
+            return NonConsecutiveImplementation(input);
+        }
+
+        private static IEnumerable<T> NonConsecutiveImplementation<T>(IEnumerable<T> input)
+        {
+            var isFirst = true;
+            var last = default(T);
+            foreach (var item in input)
+            {
+                if (isFirst || !object.Equals(item, last))
+                {
+                    yield return item;
+                    last = item;
+                    isFirst = false;
+                }
+            }
+        }
+
+        #endregion
     }
 }
